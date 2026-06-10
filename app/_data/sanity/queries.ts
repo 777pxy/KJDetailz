@@ -28,7 +28,7 @@ export async function getReviews(): Promise<types.Customer_review[]> {
 export async function getServicePackages(): Promise<types.PackageWithExtras[]> {
     "use cache"
     cacheTag('sanity')
-    cacheLife('seconds')
+    cacheLife('halfDay')
 
     try {
         return client.fetch(PACKAGETYPES_QUERY)
