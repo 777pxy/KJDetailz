@@ -49,6 +49,10 @@ export type Extra_service = {
   price?: number
 }
 
+export type PackageWithExtras = Omit<Package, 'extra_services'> & {
+  extra_services: Extra_service[]
+}
+
 export type SanityImageAssetReference = {
   _ref: string
   _type: 'reference'

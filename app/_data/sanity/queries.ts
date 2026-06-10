@@ -4,8 +4,13 @@ import { cacheTag, cacheLife } from 'next/cache'
 
 const REVIEWS_QUERY = `*[_type == "customer_review" && isVisible] | order(_createdAt desc) { customer_name, body, service_type, star }[0...3]`
 
-const PACKAGETYPES_QUERY = `*[_type == "package" && isVisible] | order(_createdAt desc) { package_name, package_service, extra_services, price }`
-
+const PACKAGETYPES_QUERY = `*[_type == "package" && isVisible] | order(price asc) { 
+  _id,
+  package_name, 
+  package_services, 
+  "extra_services": extra_services[]-> | order(price asc) { _id, description, price }, 
+  price 
+}`
 const IMAGE_QUERY = `*[_type == "gallary_image" && isVisible] | order(_createdAt desc) { image_name, image }`
 
 export async function getReviews(): Promise<types.Customer_review[]> {
@@ -20,10 +25,10 @@ export async function getReviews(): Promise<types.Customer_review[]> {
     }
 }
 
-export async function getServicePackages(): Promise<types.Package[]> {
+export async function getServicePackages(): Promise<types.PackageWithExtras[]> {
     "use cache"
     cacheTag('sanity')
-    cacheLife('halfDay')
+    cacheLife('seconds')
 
     try {
         return client.fetch(PACKAGETYPES_QUERY)

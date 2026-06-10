@@ -47,7 +47,9 @@ export function SiteFooter() {
         <div className="flex flex-col items-center text-center">
             <div className="flex items-center justify-center gap-1 text-muted-foreground md:text-sm">
               <span>Website crafted by</span>
-              <a href={process.env.WEBSITE_CREATOR_LINK} className="font-serif italic text-foreground text-lg hover:text-accent hover:text-xl transition:all duration-300">Praj Yakha</a>
+              <a href={process.env.WEBSITE_CREATOR_LINK} className="font-serif italic text-foreground text-xl hover:text-[#00BFD8] hover:text-2xl transition:all duration-300"
+              >Praj Yakha.
+              </a>
 
             </div>
           <div className=" text-xs text-muted-foreground pt-2">
