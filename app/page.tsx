@@ -9,30 +9,12 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getReviews, getImages, getServicePackages } from "@/app/_data/sanity/queries";
+import * as types from "@/lib/sanity/sanity.types";
+import { Suspense } from 'react'
+import ReviewsSection from '@/app/components/review-section'
 
-const testimonials = [
-  {
-    initials: "JM",
-    name: "James Mitchell",
-    rating: 5,
-    quote:
-      "Absolutely outstanding service. My car looked brand new after the full valet. The attention to detail is second to none.",
-  },
-  {
-    initials: "SC",
-    name: "Sarah Chen",
-    rating: 5,
-    quote:
-      "I've tried several valeting services, but KJ Detailz stands above the rest. Professional, thorough, and the results speak for themselves.",
-  },
-  {
-    initials: "RB",
-    name: "Robert Barnes",
-    rating: 5,
-    quote:
-      "The ceramic coating has transformed my vehicle. Water beads off like magic, and it still looks showroom fresh six months later.",
-  },
-];
+
 
 const trustSignals: {
   Icon: LucideIcon;
@@ -61,9 +43,8 @@ const trustSignals: {
   },
 ];
 
-const REVIEWS_QUERY = `*[_type == "review"]{  }`
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <section className="flex min-h-[calc(100vh-88px)] flex-col md:h-[calc(100vh-88px)] md:flex-row">
@@ -148,35 +129,9 @@ export default function Home() {
             <div className="mx-auto h-[2px] w-24 bg-primary" />
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-            {testimonials.map((testimonial) => (
-              <article
-                key={testimonial.name}
-                className="rounded-lg border border-border bg-card p-6 transition-all duration-300 hover:border-primary/30 md:p-8"
-              >
-                <div className="mb-4 flex gap-1">
-                  {Array.from({ length: testimonial.rating }).map((_, index) => (
-                    <Star
-                      key={index}
-                      className="size-4 fill-primary text-primary md:size-5"
-                      aria-hidden="true"
-                    />
-                  ))}
-                </div>
-                <p className="mb-4 text-sm leading-relaxed text-foreground md:mb-6 md:text-base">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="flex size-10 items-center justify-center rounded-full bg-secondary text-xs font-semibold md:size-12 md:text-sm">
-                    {testimonial.initials}
-                  </div>
-                  <div className="text-xs text-muted-foreground md:text-sm">
-                    {testimonial.name}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+          <Suspense fallback={<div>Loading reviews...</div>}>
+            <ReviewsSection />
+          </Suspense>
         </div>
       </section>
 
