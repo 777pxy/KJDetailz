@@ -80,7 +80,7 @@ export default function ServicesPage() {
             href="tel:07123456789"
             className="inline-block rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:bg-primary/90 md:px-8 md:py-4 md:text-base"
           >
-            07123 456 789
+            {process.env.PHONE_NUMBER}
           </a>
         </div>
       </div>

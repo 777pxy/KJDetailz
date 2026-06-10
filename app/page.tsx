@@ -9,10 +9,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { getReviews, getImages, getServicePackages } from "@/app/_data/sanity/queries";
-import * as types from "@/lib/sanity/sanity.types";
 import { Suspense } from 'react'
 import ReviewsSection from '@/app/components/review-section'
+import GallerySection from "@/app/components/gallery-section";
 
 
 
@@ -165,18 +164,9 @@ export default async function Home() {
               Our Work
             </h2>
           </div>
-          <div className="mb-6 grid grid-cols-2 gap-3 md:mb-8 md:grid-cols-3 md:gap-4">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <div
-                key={index}
-                className="group relative aspect-square cursor-pointer overflow-hidden rounded-lg bg-muted"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-transparent opacity-30" />
-                <div className="absolute right-2 top-2 size-6 border-r-2 border-t-2 border-transparent transition-all duration-300 group-hover:border-primary md:size-8" />
-                <div className="absolute inset-0 transition-transform duration-300 group-hover:scale-105" />
-              </div>
-            ))}
-          </div>
+            <Suspense>
+              <GallerySection/>
+            </Suspense>
           <p className="text-center text-base text-muted-foreground md:text-lg">
             Every vehicle treated with precision
           </p>

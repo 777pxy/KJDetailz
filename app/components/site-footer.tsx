@@ -36,16 +36,23 @@ export function SiteFooter() {
               All bookings by phone
             </div>
             <a
-              href="tel:07123456789"
+              href={"tel:"+process.env.PHONE_NUMBER}
               className="mt-1 block font-medium text-foreground transition-colors hover:text-primary"
             >
-              07123 456 789
+              {process.env.PHONE_NUMBER}
             </a>
           </div>
         </div>
 
-        <div className="text-center text-xs text-muted-foreground">
-          &copy; 2025 KJ Detailz. All rights reserved.
+        <div className="flex flex-col items-center text-center">
+            <div className="flex items-center justify-center gap-1 text-muted-foreground md:text-sm">
+              <span>Website crafted by</span>
+              <a href={process.env.WEBSITE_CREATOR_LINK} className="font-serif italic text-foreground text-lg hover:text-accent hover:text-xl transition:all duration-300">Praj Yakha</a>
+
+            </div>
+          <div className=" text-xs text-muted-foreground pt-2">
+            &copy; 2026 KJ Detailz. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>

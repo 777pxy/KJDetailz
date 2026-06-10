@@ -26,7 +26,7 @@ export default function ContactPage() {
             href="tel:07123456789"
             className="mb-6 inline-block break-all font-serif text-3xl font-bold text-primary transition-colors hover:text-primary/80 md:mb-8 md:text-5xl lg:text-6xl"
           >
-            07123 456 789
+            {process.env.PHONE_NUMBER}
           </a>
           <div className="mx-auto mb-6 h-[2px] w-24 bg-primary md:mb-8" />
           <p className="mb-2 text-xs uppercase tracking-wider text-muted-foreground md:text-sm">

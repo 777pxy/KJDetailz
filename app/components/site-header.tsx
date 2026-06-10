@@ -135,7 +135,7 @@ export function SiteHeader() {
                 href="tel:07123456789"
                 className="text-xl font-medium text-primary transition-colors hover:text-primary/80"
               >
-                07123 456 789
+                {process.env.PHONE_NUMBER}
               </a>
             </div>
           </div>

@@ -1,7 +1,5 @@
 import { createClient } from 'next-sanity'
-
-if ( process.env.SANITY_PROJECT_ID == undefined ) { console.log("projectId missing")}
-if ( process.env.SANITY_DATASET == undefined ) { console.log("dataset missing")}
+import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url'
 
 
 export const client = createClient({
@@ -10,3 +8,9 @@ export const client = createClient({
   apiVersion: '2024-01-01',
   useCdn: true,
 })
+
+const builder = createImageUrlBuilder(client)
+
+export function urlFor(source: SanityImageSource) {
+  return builder.image(source)
+}
