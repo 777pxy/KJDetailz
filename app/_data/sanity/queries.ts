@@ -2,7 +2,7 @@ import { client } from "@/src/sanity/sanity";
 import * as types from "@/lib/sanity/sanity.types"
 import { cacheTag, cacheLife } from 'next/cache'
 
-const REVIEWS_QUERY = `*[_type == "customer_review" && isVisible] | order(_createdAt desc) { customer_name, body, service_type, star }[0...3]`
+const REVIEWS_QUERY = `*[_type == "customer_review" && isVisible] | order(_createdAt desc) { customer_name, body, service_type, stars }[0...3]`
 
 const PACKAGETYPES_QUERY = `*[_type == "package" && isVisible] | order(price asc) { 
   _id,

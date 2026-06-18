@@ -9,11 +9,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from 'react'
-import ReviewsSection from '@/app/components/review-section'
+import { Suspense } from "react";
+import ReviewsSection from "@/app/components/review-section";
 import GallerySection from "@/app/components/gallery-section";
-
-
 
 const trustSignals: {
   Icon: LucideIcon;
@@ -42,7 +40,6 @@ const trustSignals: {
   },
 ];
 
-
 export default async function Home() {
   return (
     <>
@@ -52,7 +49,7 @@ export default async function Home() {
           className="group relative flex min-h-[50vh] flex-1 flex-col items-center justify-center overflow-hidden bg-[#111111] p-8 transition-all duration-300 hover:brightness-110 md:min-h-0 md:p-12"
         >
           <Image
-            src="/founder_image.jpg"
+            src="/founder_hero_image.jpg"
             alt=""
             aria-hidden="true"
             fill
@@ -108,7 +105,7 @@ export default async function Home() {
             </div>
             <div className="mb-5 mt-3 h-[2px] w-full bg-primary md:mb-6 md:mt-4" />
             <p className="mb-6 text-base text-muted-foreground md:mb-8 md:text-lg">
-              From a refresh to a full transformation
+              From basic valets to ceramic coatings
             </p>
             <div className="flex items-center justify-center gap-2 text-sm text-foreground opacity-80 transition-opacity group-hover:opacity-100 md:text-base">
               <span>View Services</span>
@@ -164,12 +161,9 @@ export default async function Home() {
               Our Work
             </h2>
           </div>
-            <Suspense>
-              <GallerySection/>
-            </Suspense>
-          <p className="text-center text-base text-muted-foreground md:text-lg">
-            Every vehicle treated with precision
-          </p>
+          <Suspense>
+            <GallerySection />
+          </Suspense>
         </div>
       </section>
     </>

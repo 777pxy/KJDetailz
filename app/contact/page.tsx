@@ -1,53 +1,104 @@
 import type { Metadata } from "next";
 import { Phone } from "lucide-react";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Call KJ Detailz to book a valet or detail.",
+  description: "Call or follow KJ Detailz to book a valet or detail.",
 };
+
+const contactMethods = [
+  {
+    icon: Phone,
+    label: "Phone",
+    detail: process.env.PHONE_NUMBER ?? "—",
+    sub: "Mon – Sat, 9:00 AM – 6:00 PM",
+    href: `tel:${process.env.PHONE_NUMBER}`,
+    cta: "Call now",
+  },
+  {
+    icon: FaFacebook,
+    label: "Facebook",
+    detail: "KJ Detailz",
+    sub: "Message us or see our latest work",
+    href: process.env.FACEBOOK_LINK,
+    cta: "Open Facebook",
+  },
+  {
+    icon: FaInstagram,
+    label: "Instagram",
+    detail: "@kjdetailz",
+    sub: "Before & afters, tips, and updates",
+    href: process.env.INSTAGRAM_LINK,
+    cta: "Open Instagram",
+  },
+];
 
 export default function ContactPage() {
   return (
-    <section className="flex min-h-screen items-center justify-center px-4 py-12 md:px-8 md:py-24">
-      <div className="mx-auto max-w-[800px] text-center">
-        <h1 className="mb-4 font-serif text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
-          Get In Touch
-        </h1>
-        <p className="mb-12 text-lg text-muted-foreground md:mb-16 md:text-xl">
-          All bookings are taken over the phone. We keep it personal.
-        </p>
-
-        <div className="mb-8 rounded-lg border border-border bg-card p-8 md:mb-12 md:p-16">
-          <Phone
-            className="mx-auto mb-6 size-12 text-primary md:mb-8 md:size-16"
-            aria-hidden="true"
-          />
-          <a
-            href="tel:07123456789"
-            className="mb-6 inline-block break-all font-serif text-3xl font-bold text-primary transition-colors hover:text-primary/80 md:mb-8 md:text-5xl lg:text-6xl"
-          >
-            {process.env.PHONE_NUMBER}
-          </a>
-          <div className="mx-auto mb-6 h-[2px] w-24 bg-primary md:mb-8" />
-          <p className="mb-2 text-xs uppercase tracking-wider text-muted-foreground md:text-sm">
-            Available Monday - Saturday
+    <section className="min-h-screen px-4 py-16 md:px-8 md:py-28">
+      <div className="mx-auto max-w-[1000px]">
+        {/* Header */}
+        <div className="mb-14 md:mb-20">
+          <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            Contact
           </p>
-          <p className="text-xs text-muted-foreground md:text-sm">
-            9:00 AM - 6:00 PM
-          </p>
+          <h1 className="font-serif text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+            Let&apos;s get your <br className="hidden md:block" />
+            vehicle booked in.
+          </h1>
         </div>
 
-        <div className="mx-auto max-w-[600px]">
-          <p className="mb-6 text-base leading-relaxed text-foreground/90 md:text-lg">
-            Based in Dorset, we provide premium valeting services for local
-            drivers who want careful, reliable vehicle care. Whether you need a
-            quick refresh or a complete transformation, KJ Detailz is ready to
-            bring your vehicle back to its finest.
+        {/* Contact cards */}
+        <div className="mb-16 grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6">
+          {contactMethods.map(
+            ({ icon: Icon, label, detail, sub, href, cta }) => (
+              <a
+                key={label}
+                href={href}
+                target={label !== "Phone" ? "_blank" : undefined}
+                rel={label !== "Phone" ? "noopener noreferrer" : undefined}
+                className="group flex flex-col rounded-lg border border-border bg-card p-6 transition-all duration-300 hover:border-primary/50 hover:bg-card/80 md:p-8"
+              >
+                <Icon
+                  className="mb-5 text-primary md:size-8"
+                  aria-hidden="true"
+                  size={28}
+                />
+                <p className="mb-1 text-xs uppercase tracking-[0.15em] text-muted-foreground">
+                  {label}
+                </p>
+                <p className="mb-1 font-serif text-xl font-bold md:text-2xl">
+                  {detail}
+                </p>
+                <p className="mb-6 text-xs leading-relaxed text-muted-foreground md:text-sm">
+                  {sub}
+                </p>
+                <span className="mt-auto text-xs font-semibold uppercase tracking-wider text-primary transition-opacity duration-200 group-hover:opacity-70">
+                  {cta} →
+                </span>
+              </a>
+            ),
+          )}
+        </div>
+
+        {/* Divider */}
+        <div className="mb-16 h-[1px] w-full bg-border" />
+
+        {/* Blurb */}
+        <div className="max-w-[640px]">
+          <p className="mb-5 text-base leading-relaxed text-foreground/85 md:text-lg">
+            Based in Dorset, KJ Detailz provides professional mobile valeting
+            and detailing services, bringing premium vehicle care directly to
+            your home or workplace. Whether your vehicle needs a quick refresh
+            or a complete transformation, we deliver outstanding results with
+            attention to every detail.
           </p>
-          <p className="text-base leading-relaxed text-foreground/90 md:text-lg">
-            We operate on an appointment-only basis to ensure every client
-            receives our full attention. Call us to discuss your requirements,
-            and we will find a time that works for you.
+          <p className="text-base leading-relaxed text-foreground/85 md:text-lg">
+            Fully insured, reliable, and passionate about what we do, we’re
+            committed to leaving your vehicle looking its absolute best. Get in
+            touch today to book your appointment and give your vehicle the care
+            it deserves.
           </p>
         </div>
       </div>

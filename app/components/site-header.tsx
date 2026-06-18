@@ -2,6 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -27,11 +28,14 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 h-[88px] border-b border-border bg-background px-4 md:px-8">
       <div className="mx-auto flex h-full max-w-[1600px] items-center justify-between">
-        <Link
-          href="/"
-          className="font-serif text-xl font-bold italic text-foreground md:text-2xl"
-        >
-          KJ Detailz
+        <Link href="/" className="inline-flex items-center">
+          <Image
+            src="/KJ_logo_HD.png"
+            alt="KJ Detailz"
+            width={120}
+            height={75}
+            className="object-contain"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -86,10 +90,16 @@ export function SiteHeader() {
             <div className="mb-10 flex items-center justify-between gap-4">
               <Link
                 href="/"
-                className="font-serif text-2xl font-bold italic text-foreground"
+                className="inline-flex items-center"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                KJ Detailz
+                <Image
+                  src="/KJ_logo_HD.png"
+                  alt="KJ Detailz"
+                  width={80}
+                  height={75}
+                  className="object-contain"
+                />
               </Link>
               <button
                 type="button"
@@ -127,17 +137,7 @@ export function SiteHeader() {
 
             <div className="my-8 border-t border-white/10" />
 
-            <div className="px-3">
-              <div className="mb-2 text-xs uppercase tracking-widest text-muted-foreground">
-                Book by phone
-              </div>
-              <a
-                href="tel:07123456789"
-                className="text-xl font-medium text-primary transition-colors hover:text-primary/80"
-              >
-                {process.env.PHONE_NUMBER}
-              </a>
-            </div>
+
           </div>
         </div>
       ) : null}
