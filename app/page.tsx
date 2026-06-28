@@ -35,7 +35,7 @@ const trustSignals: {
   },
   {
     Icon: Award,
-    label: "Nominated for Blandford Young Entrepreneur of the Year",
+    label: `Blandford Young Entrepreneur\n 2026 Winner`,
     sub: "Recognised excellence",
   },
 ];
@@ -55,17 +55,21 @@ export default async function Home() {
             fill
             preload
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="absolute inset-0 object-cover transition-transform duration-700 scale-[1.35] group-hover:scale-[1.42]"
+            className="absolute inset-0 object-cover transition-transform duration-700 scale-[1.00] group-hover:scale-[1.05]"
             style={{
-              objectPosition: "center 40%",
-              transformOrigin: "center 60%",
+              objectPosition: "center 10%",
+              transformOrigin: "center 55%",
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
           <div className="relative z-10 max-w-md text-center">
             <div className="mb-0 flex h-[7rem] items-end justify-center md:h-[8.5rem] lg:h-[10rem]">
-              <h1 className="font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
-                Meet the Team
+              <h1 className="text-left font-serif text-4xl font-bold md:text-5xl lg:text-6xl">
+                Meet our{" "}
+                <span className="block -skew-x-12 underline underline-offset-6 decoration-2">
+                  award winning
+                </span>{" "}
+                team
               </h1>
             </div>
             <div className="mb-5 mt-3 h-[2px] w-full bg-primary md:mb-6 md:mt-4" />
@@ -118,8 +122,17 @@ export default async function Home() {
 
       <section className="bg-background px-4 py-12 md:px-8 md:py-24">
         <div className="mx-auto max-w-[1400px]">
-          <div className="mb-12 text-center md:mb-16">
-            <h2 className="mb-3 font-serif text-3xl font-bold md:mb-4 md:text-4xl lg:text-5xl">
+          <div className="flex flex-col mb-12 text-center md:mb-16">
+            <div className="relative mx-auto aspect-square w-32 shrink-0 lg:w-40">
+              <Image
+                src="/award_badge.png"
+                alt="Award badge"
+                fill
+                sizes="(max-width: 768px) 5rem, (max-width: 1024px) 6rem, 8rem"
+                className="object-contain"
+              />
+            </div>
+            <h2 className="pt-4 mb-3 font-serif text-3xl font-bold md:mb-4 md:text-4xl lg:text-5xl">
               What Our Clients Say
             </h2>
             <div className="mx-auto h-[2px] w-24 bg-primary" />
@@ -141,7 +154,7 @@ export default async function Home() {
               >
                 <item.Icon className="size-6 text-primary" aria-hidden="true" />
                 <div>
-                  <p className="mb-1 font-serif text-[1.05rem] font-semibold leading-snug text-foreground">
+                  <p className="mb-1 whitespace-pre-line font-serif text-[1.05rem] font-semibold leading-snug text-foreground">
                     {item.label}
                   </p>
                   <p className="text-xs uppercase tracking-wide text-muted-foreground">

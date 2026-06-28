@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Suspense } from "react";
 import { PackagesSection } from "../components/packages-section";
 
@@ -12,7 +13,16 @@ export default async function ServicesPage() {
     <section className="min-h-screen px-4 py-12 md:px-8 md:py-24">
       <div className="mx-auto max-w-[1100px]">
         <div className="mb-12 text-center md:mb-20">
-          <h1 className="mb-4 font-serif text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
+          <div className="relative mx-auto aspect-square w-32 shrink-0 lg:w-40">
+            <Image
+              src="/award_badge.png"
+              alt="Award badge"
+              fill
+              sizes="(max-width: 768px) 5rem, (max-width: 1024px) 6rem, 8rem"
+              className="object-contain"
+            />
+          </div>
+          <h1 className="pt-2 mb-4 font-serif text-4xl font-bold md:mb-6 md:text-5xl lg:text-6xl">
             Our Services
           </h1>
           <p className="text-lg text-muted-foreground md:text-xl">

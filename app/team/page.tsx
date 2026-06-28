@@ -17,7 +17,9 @@ At 20 years old, I have gained hands-on experience valeting and detailing a wide
 
 Having lived in Dorset my whole life, I founded KJ Detailz to provide a reliable, professional mobile valeting and detailing service across the local area. I'm fully insured, giving you complete peace of mind when trusting me with your vehicle.
 
-I've always had a passion for vehicles and keeping them looking their best. My aim is simple: to treat every vehicle with the same care and attention as if it were my own, leaving it looking its absolute best.`,
+I've always had a passion for vehicles and keeping them looking their best. My aim is simple: to treat every vehicle with the same care and attention as if it were my own, leaving it looking its absolute best.
+
+My passion and attention to detail has led to my business growing and being held to such high standards that I have been awarded the title Blandford's Young Entrepreneur of the year 2026.`,
   },
 ];
 
@@ -63,14 +65,25 @@ export default function TeamPage() {
 
             {/* Right — name/role flush to top, then bio */}
             <div className="flex flex-col">
-              <div className="mb-8">
-                <h2 className="mb-3 font-serif text-3xl font-bold md:text-4xl">
-                  {member.name}
-                </h2>
-                <div className="mb-3 h-[2px] w-12 bg-primary" />
-                <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  {member.role}
-                </p>
+              <div className="flex flex-row items-start gap-4 justify-between md:gap-6 pb-4">
+                <div className="pr-0 md:mb-8 md:pr-4">
+                  <h2 className="mb-3 font-serif text-3xl font-bold md:text-4xl">
+                    {member.name}
+                  </h2>
+                  <div className="mb-3 h-0.5 w-12 bg-primary" />
+                  <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                    {member.role}
+                  </p>
+                </div>
+                <div className="relative aspect-square w-20 shrink-0 sm:w-20 md:w-24 lg:w-32">
+                  <Image
+                    src="/award_badge.png"
+                    alt="Award badge"
+                    fill
+                    sizes="(max-width: 768px) 5rem, (max-width: 1024px) 6rem, 8rem"
+                    className="object-contain"
+                  />
+                </div>
               </div>
 
               <div className="space-y-5">
@@ -82,15 +95,6 @@ export default function TeamPage() {
                     {paragraph}
                   </p>
                 ))}
-              </div>
-
-              <div className="mt-10 inline-flex items-center gap-3 rounded-md border border-border/60 bg-muted/40 px-4 py-3 w-fit">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
-                  ✓
-                </span>
-                <span className="text-xs text-muted-foreground tracking-wide">
-                  Fully insured · Mobile across Dorset
-                </span>
               </div>
             </div>
           </article>

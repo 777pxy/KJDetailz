@@ -1,9 +1,9 @@
-import { getImagesForGallery } from '@/app/_data/sanity/queries'
-import Image from 'next/image'
-import { urlFor } from '@/src/sanity/sanity'
+import { getImagesForGallery } from "@/app/_data/sanity/queries";
+import Image from "next/image";
+import { urlFor } from "@/src/sanity/sanity";
 
 export default async function GallerySection() {
-  const images = await getImagesForGallery()
+  const images = await getImagesForGallery();
 
   return (
     <div className="mb-6 grid grid-cols-2 gap-3 md:mb-8 md:grid-cols-3 md:gap-4">
@@ -14,11 +14,15 @@ export default async function GallerySection() {
         >
           {item.image && (
             <Image
-            src={urlFor(item.image).width(800).quality(80).url()}
-            alt={item.image_name ?? 'Gallery image'}
-            fill
-            sizes="(max-width: 768px) 50vw, 33vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+              src={urlFor(item.image)
+                .width(800)
+                .quality(80)
+                .format("webp")
+                .url()}
+              alt={item.image_name ?? "Gallery image"}
+              fill
+              sizes="(max-width: 768px) 50vw, 33vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
           )}
           <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-transparent opacity-30" />
@@ -26,5 +30,5 @@ export default async function GallerySection() {
         </div>
       ))}
     </div>
-  )
+  );
 }

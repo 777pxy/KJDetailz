@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Phone } from "lucide-react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 
@@ -40,13 +41,26 @@ export default function ContactPage() {
       <div className="mx-auto max-w-[1000px]">
         {/* Header */}
         <div className="mb-14 md:mb-20">
-          <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Contact
-          </p>
-          <h1 className="font-serif text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
-            Let&apos;s get your <br className="hidden md:block" />
-            vehicle booked in.
-          </h1>
+          <div className="flex flex-row justify-between">
+            <div className="">
+              <p className="mb-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                Contact
+              </p>
+              <h1 className="font-serif text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+                Let&apos;s get your <br className="hidden md:block" />
+                vehicle booked in.
+              </h1>
+            </div>
+            <div className="relative aspect-square w-32 shrink-0 lg:w-40">
+              <Image
+                src="/award_badge.png"
+                alt="Award badge"
+                fill
+                sizes="(max-width: 768px) 5rem, (max-width: 1024px) 6rem, 8rem"
+                className="object-contain"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Contact cards */}
