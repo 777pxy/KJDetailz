@@ -49,13 +49,13 @@ export default function TeamPage() {
               style={{ aspectRatio: "3/4" }}
             >
               <Image
-                src="/founder_image.jpg"
+                src="/founder_hero_image.jpg"
                 alt="Kieran Jackson"
                 fill
                 sizes="(max-width: 768px) 100vw, 400px"
                 className="object-cover transition-transform duration-500 scale-[1.05] group-hover:scale-[1.1]"
                 style={{
-                  objectPosition: "center 8%",
+                  objectPosition: "center 0%",
                   transformOrigin: "center 30%",
                 }}
                 loading="eager"

@@ -49,7 +49,7 @@ export default async function Home() {
           className="group relative flex min-h-[50vh] flex-1 flex-col items-center justify-center overflow-hidden bg-[#111111] p-8 transition-all duration-300 hover:brightness-110 md:min-h-0 md:p-12"
         >
           <Image
-            src="/founder_hero_image.jpg"
+            src="/founder_hero_image1.jpg"
             alt=""
             aria-hidden="true"
             fill
@@ -57,7 +57,7 @@ export default async function Home() {
             sizes="(max-width: 768px) 100vw, 50vw"
             className="absolute inset-0 object-cover transition-transform duration-700 scale-[1.00] group-hover:scale-[1.05]"
             style={{
-              objectPosition: "center 10%",
+              objectPosition: "center 50%",
               transformOrigin: "center 55%",
             }}
           />

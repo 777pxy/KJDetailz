@@ -13,7 +13,7 @@ const contactMethods = [
     icon: Phone,
     label: "Phone",
     detail: process.env.PHONE_NUMBER ?? "—",
-    sub: "Mon – Sat, 9:00 AM – 6:00 PM",
+    sub: "Mon - Sat, 9:00 AM - 6:00 PM",
     href: `tel:${process.env.PHONE_NUMBER}`,
     cta: "Call now",
   },
