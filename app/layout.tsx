@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
-import { inter, playfair} from "@/src/fonts/fonts"
+import { inter, playfair } from "@/src/fonts/fonts";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,11 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html 
-    lang="en"
-    className={`${inter.variable} ${playfair.variable}`}
-    >
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body>
+        <Analytics />
         <div className="flex min-h-screen flex-col bg-background text-foreground">
           <SiteHeader />
           <main className="flex-1">{children}</main>
