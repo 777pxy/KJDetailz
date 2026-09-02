@@ -18,7 +18,7 @@ export async function getReviews(): Promise<types.Customer_review[]> {
     cacheTag('sanity')
     cacheLife('halfDay')
     try {
-        return client.fetch(REVIEWS_QUERY)
+        return await client.fetch(REVIEWS_QUERY)
     } catch {
         console.error("getReviews failed")
         return []
@@ -31,7 +31,7 @@ export async function getServicePackages(): Promise<types.PackageWithExtras[]> {
     cacheLife('halfDay')
 
     try {
-        return client.fetch(PACKAGETYPES_QUERY)
+        return await client.fetch(PACKAGETYPES_QUERY)
     } catch {
         console.error("getServicePackages failed")
         return []
@@ -44,7 +44,7 @@ export async function getImagesForGallery(): Promise<types.Gallary_image[]> {
     cacheLife('halfDay')
 
     try {
-        const galleryImages = client.fetch(IMAGE_QUERY)
+        const galleryImages = await client.fetch(IMAGE_QUERY)
         return galleryImages
     } catch {
         console.error("getImagesForGallery failed")

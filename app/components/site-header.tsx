@@ -13,7 +13,7 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-function isActiveLink(href: string, pathname: string) {
+export function isActiveLink(href: string, pathname: string) {
   if (href === "/") {
     return pathname === "/";
   }

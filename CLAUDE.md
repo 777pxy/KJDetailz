@@ -1,1 +1,43 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 @AGENTS.md
+
+## What this is
+
+Marketing/booking site for KJ Detailz, a car valeting & detailing business in Dorset, UK. Next.js App Router site with content (reviews, service packages, gallery images) pulled from Sanity CMS. No backend of its own — Sanity is the only data source, deployed to Vercel.
+
+## Next.js version warning
+
+This repo runs **Next.js 16.2.7 / React 19.2.4**, newer than most training data. Before writing code that touches caching, the Image component, or routing conventions, check `node_modules/next/dist/docs/01-app/` rather than assuming Next.js 13-15 behavior. Notably:
+
+- `cacheComponents: true` is set in `next.config.ts` — this is the unified replacement for the old `experimental.ppr` / `experimental.useCache` / `experimental.dynamicIO` flags. Data fetching is dynamic by default; anything that should be cached needs an explicit `"use cache"` directive (see `app/_data/sanity/queries.ts` for the pattern: `"use cache"` + `cacheTag(...)` + `cacheLife(...)`).
+- `next/image` is used with a `preload` prop on hero images (see `app/page.tsx`) — verify current prop names against the docs before assuming legacy `priority` semantics.
+
+## Commands
+
+```bash
+npm run dev      # start dev server (Turbopack)
+npm run build    # production build
+npm run start    # run production build
+npm run lint     # eslint (flat config, eslint-config-next core-web-vitals + typescript)
+```
+
+There is no test suite configured in this repo.
+
+## Architecture
+
+**Data flow**: Sanity CMS → `app/_data/sanity/queries.ts` → async Server Components. Every query function is cached with `"use cache"` + `cacheTag('sanity')` + `cacheLife('halfDay')` (12h revalidate / 24h expire) and swallows fetch errors into an empty-array fallback rather than throwing, so a Sanity outage degrades sections to empty rather than crashing the page.
+
+- `src/sanity/sanity.ts` — the `next-sanity` client (`SANITY_PROJECT_ID` / `SANITY_DATASET` env vars, CDN enabled) and the `urlFor()` image URL builder from `@sanity/image-url`.
+- `lib/sanity/sanity.types.ts` — **generated** by `sanity typegen generate` from the Sanity schema/GROQ queries. Do not hand-edit; regenerate from the Sanity project if the schema changes.
+- `app/_data/sanity/queries.ts` — all GROQ queries and the cached fetch functions (`getReviews`, `getServicePackages`, `getImagesForGallery`). Add new content queries here, following the existing `"use cache"` + try/catch pattern.
+
+**Page/component split**: pages under `app/*/page.tsx` are async Server Components that render data-fetching child components (`app/components/*-section.tsx`) wrapped in `<Suspense>`, so each content section streams independently. `SiteHeader` is the only client component (`"use client"`, needs `usePathname` + mobile menu state); everything else is server-rendered.
+
+**Env vars** (`.env.local`, not committed): `SANITY_PROJECT_ID`, `SANITY_DATASET`, `PHONE_NUMBER`, `FACEBOOK_LINK`, `INSTAGRAM_LINK`, `WEBSITE_CREATOR_LINK`. Several are read directly in Server Components (e.g. `process.env.PHONE_NUMBER` in `site-footer.tsx` and `app/contact/page.tsx`) rather than piped through props.
+
+**Styling**: Tailwind v4 (`@tailwindcss/postcss`, no `tailwind.config.*` — config lives in CSS). Theme tokens (colors, radius, fonts) are defined as CSS variables in `app/styles/themes.css` under `@theme inline`, imported via `app/styles/index.css` → `app/globals.css`. Fonts (Inter, Playfair Display) are set up in `src/fonts/fonts.ts` via `next/font` and exposed as CSS variables applied on `<html>` in `app/layout.tsx`.
+
+**Images**: static marketing images live in `public/`; Sanity-sourced images (gallery) go through `urlFor(image).width(...).quality(...).format("webp").url()` before being passed to `next/image`. Remote image loading is restricted to `cdn.sanity.io` in `next.config.ts`.

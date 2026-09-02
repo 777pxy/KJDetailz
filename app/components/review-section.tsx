@@ -2,7 +2,7 @@
 import { getReviews } from "@/app/_data/sanity/queries";
 import { Star } from "lucide-react";
 
-function getInitials(name: string | undefined): string {
+export function getInitials(name: string | undefined): string {
   if (name == undefined) {
     return "JD";
   }
