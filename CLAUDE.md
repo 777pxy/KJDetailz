@@ -22,17 +22,23 @@ npm run dev      # start dev server (Turbopack)
 npm run build    # production build
 npm run start    # run production build
 npm run lint     # eslint (flat config, eslint-config-next core-web-vitals + typescript)
+npm test         # jest unit tests (see __tests__/)
+npm run test:watch
 ```
 
-There is no test suite configured in this repo.
+Unit tests live in `__tests__/` (Jest, via `next/jest` — see `jest.config.ts`). They cover pure logic only (`isActiveLink`, `getInitials`, the `_data/sanity/queries.ts` error-fallback behavior) — no component-rendering tests. Sanity's client is mocked at the module boundary (`jest.mock("../src/sanity/sanity", ...)`) rather than imported for real, since `next-sanity` ships ESM-only and trips Jest's CJS interop; `next/cache` is mocked too, since `cacheTag`/`cacheLife` throw outside a real `cacheComponents` runtime.
+
+## Git
+
+Keep commit messages short — a concise summary line, plus a body only when it adds real context. Avoid overly verbose, multi-paragraph commit messages.
 
 ## Architecture
 
 **Data flow**: Sanity CMS → `app/_data/sanity/queries.ts` → async Server Components. Every query function is cached with `"use cache"` + `cacheTag('sanity')` + `cacheLife('halfDay')` (12h revalidate / 24h expire) and swallows fetch errors into an empty-array fallback rather than throwing, so a Sanity outage degrades sections to empty rather than crashing the page.
 
 - `src/sanity/sanity.ts` — the `next-sanity` client (`SANITY_PROJECT_ID` / `SANITY_DATASET` env vars, CDN enabled) and the `urlFor()` image URL builder from `@sanity/image-url`.
-- `lib/sanity/sanity.types.ts` — **generated** by `sanity typegen generate` from the Sanity schema/GROQ queries. Do not hand-edit; regenerate from the Sanity project if the schema changes.
-- `app/_data/sanity/queries.ts` — all GROQ queries and the cached fetch functions (`getReviews`, `getServicePackages`, `getImagesForGallery`). Add new content queries here, following the existing `"use cache"` + try/catch pattern.
+- `lib/sanity/sanity.types.ts` — **generated** by `sanity typegen generate` from the Sanity schema/GROQ queries. Do not hand-edit; regenerate from the Sanity project if the schema changes. **Important**: the Sanity schema/Studio config is *not* in this repo — it's a separate project. When a query needs a document type that doesn't exist yet in the generated types, add a hand-written placeholder type instead of editing the generated file (see `lib/sanity/premium-package.types.ts` for the pattern, and `docs/sanity-premium-services-setup.md` for the schema change that needs to happen in Studio before it's live).
+- `app/_data/sanity/queries.ts` — all GROQ queries and the cached fetch functions (`getReviews`, `getServicePackages`, `getImagesForGallery`, `getPremiumServicePackages`). Add new content queries here, following the existing `"use cache"` + try/catch pattern (the `catch` only works because the `client.fetch(...)` call is `await`ed inside the `try` — a missing `await` lets rejections bypass the fallback entirely).
 
 **Page/component split**: pages under `app/*/page.tsx` are async Server Components that render data-fetching child components (`app/components/*-section.tsx`) wrapped in `<Suspense>`, so each content section streams independently. `SiteHeader` is the only client component (`"use client"`, needs `usePathname` + mobile menu state); everything else is server-rendered.
 
