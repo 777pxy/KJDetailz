@@ -2,6 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   Award,
+  Crown,
   Handshake,
   MapPin,
   ShieldCheck,
@@ -118,6 +119,35 @@ export default async function Home() {
           </div>
           <div className="pointer-events-none absolute inset-0 border border-transparent transition-colors group-hover:border-primary/30" />
         </Link>
+      </section>
+
+      <section className="border-y border-primary/30 bg-[#161008] px-4 py-12 md:px-8 md:py-16">
+        <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-6 text-center md:flex-row md:justify-between md:gap-8 md:text-left">
+          <div>
+            <div className="mb-3 inline-flex items-center gap-2 text-primary">
+              <Crown className="size-5" aria-hidden="true" />
+              <span className="text-xs font-semibold uppercase tracking-[0.2em]">
+                Premium Collection
+              </span>
+            </div>
+            <h2 className="mb-2 font-serif text-2xl font-bold md:text-3xl lg:text-4xl">
+              Our finest work, reserved for the finest vehicles
+            </h2>
+            <p className="text-sm text-muted-foreground md:text-base">
+              Explore our bespoke premium detailing packages.
+            </p>
+          </div>
+          <Link
+            href="/premium-services"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:brightness-110 md:text-base"
+          >
+            View Premium Services
+            <ArrowRight
+              className="size-4 transition-transform duration-300 group-hover:translate-x-1 md:size-5"
+              aria-hidden="true"
+            />
+          </Link>
+        </div>
       </section>
 
       <section className="bg-background px-4 py-12 md:px-8 md:py-24">

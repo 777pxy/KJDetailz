@@ -1,17 +1,27 @@
 import { client } from "@/src/sanity/sanity";
 import * as types from "@/lib/sanity/sanity.types"
+import type { PremiumPackageWithExtras } from "@/lib/sanity/premium-package.types"
 import { cacheTag, cacheLife } from 'next/cache'
 
 const REVIEWS_QUERY = `*[_type == "customer_review" && isVisible] | order(_createdAt desc) { customer_name, body, service_type, stars }[0...3]`
 
-const PACKAGETYPES_QUERY = `*[_type == "package" && isVisible] | order(price asc) { 
+const PACKAGETYPES_QUERY = `*[_type == "package" && isVisible] | order(price asc) {
   _id,
-  package_name, 
-  package_services, 
-  "extra_services": extra_services[]-> | order(price asc) { _id, description, price }, 
-  price 
+  package_name,
+  package_services,
+  "extra_services": extra_services[]-> | order(price asc) { _id, description, price },
+  price
 }`
-const IMAGE_QUERY = `*[_type == "gallary_image" && isVisible] | order(_createdAt desc) { image_name, image }`
+const IMAGE_QUERY = `*[_type == "gallary_image" && isVisible] | order(_createdAt desc) { _id, image_name, image }`
+
+const PREMIUM_PACKAGETYPES_QUERY = `*[_type == "premium_package" && isVisible] | order(price asc) {
+  _id,
+  package_name,
+  description,
+  package_services,
+  "extra_services": extra_services[]-> | order(price asc) { _id, description, price },
+  price
+}`
 
 export async function getReviews(): Promise<types.Customer_review[]> {
     "use cache"
@@ -48,6 +58,19 @@ export async function getImagesForGallery(): Promise<types.Gallary_image[]> {
         return galleryImages
     } catch {
         console.error("getImagesForGallery failed")
+        return []
+    }
+}
+
+export async function getPremiumServicePackages(): Promise<PremiumPackageWithExtras[]> {
+    "use cache"
+    cacheTag('sanity')
+    cacheLife('halfDay')
+
+    try {
+        return await client.fetch(PREMIUM_PACKAGETYPES_QUERY)
+    } catch {
+        console.error("getPremiumServicePackages failed")
         return []
     }
 }
