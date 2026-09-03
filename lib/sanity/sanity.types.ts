@@ -12,205 +12,228 @@
  * ---------------------------------------------------------------------------------
  */
 
-export declare const internalGroqTypeReferenceTo: unique symbol
+export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
 export type Extra_serviceReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'extra_service'
-}
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "extra_service";
+};
 
-export type Package = {
-  _id: string
-  _type: 'package'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  package_name?: string
-  package_services?: Array<string>
+export type Premium_service = {
+  _id: string;
+  _type: "premium_service";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  service_name?: string;
+  description?: string;
+  package_services?: Array<string>;
   extra_services?: Array<
     {
-      _key: string
+      _key: string;
     } & Extra_serviceReference
-  >
-  price?: number
-  isVisible?: boolean
-}
+  >;
+  price?: number;
+  isVisible?: boolean;
+};
+
+export type Package = {
+  _id: string;
+  _type: "package";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  package_name?: string;
+  package_services?: Array<string>;
+  extra_services?: Array<
+    {
+      _key: string;
+    } & Extra_serviceReference
+  >;
+  price?: number;
+  isVisible?: boolean;
+};
 
 export type Extra_service = {
-  _id: string
-  _type: 'extra_service'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  description?: string
-  price?: number
-}
+  _id: string;
+  _type: "extra_service";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  description?: string;
+  price?: number;
+};
 
-export type PackageWithExtras = Omit<Package, 'extra_services'> & {
-  extra_services: Extra_service[]
-}
+export type PackageWithExtras = Omit<Package, "extra_services"> & {
+  extra_services: Extra_service[];
+};
+
+export type Premium_serviceWithExtras = Omit<Premium_service, "extra_services"> & {
+  extra_services: Extra_service[];
+};
 
 export type SanityImageAssetReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-}
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
 
 export type Gallary_image = {
-  _id: string
-  _type: 'gallary_image'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  image_name?: string
+  _id: string;
+  _type: "gallary_image";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  image_name?: string;
   image?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  isVisible?: boolean
-}
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  isVisible?: boolean;
+};
 
 export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
-}
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
 
 export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x?: number
-  y?: number
-  height?: number
-  width?: number
-}
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
 
 export type Customer_review = {
-  _id: string
-  _type: 'customer_review'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  customer_name?: string
-  body?: string
-  service_type?: string
-  stars?: number
-  isVisible?: boolean
-}
+  _id: string;
+  _type: "customer_review";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  customer_name?: string;
+  body?: string;
+  service_type?: string;
+  stars?: number;
+  isVisible?: boolean;
+};
 
 export type SanityImagePaletteSwatch = {
-  _type: 'sanity.imagePaletteSwatch'
-  background?: string
-  foreground?: string
-  population?: number
-  title?: string
-}
+  _type: "sanity.imagePaletteSwatch";
+  background?: string;
+  foreground?: string;
+  population?: number;
+  title?: string;
+};
 
 export type SanityImagePalette = {
-  _type: 'sanity.imagePalette'
-  darkMuted?: SanityImagePaletteSwatch
-  lightVibrant?: SanityImagePaletteSwatch
-  darkVibrant?: SanityImagePaletteSwatch
-  vibrant?: SanityImagePaletteSwatch
-  dominant?: SanityImagePaletteSwatch
-  lightMuted?: SanityImagePaletteSwatch
-  muted?: SanityImagePaletteSwatch
-}
+  _type: "sanity.imagePalette";
+  darkMuted?: SanityImagePaletteSwatch;
+  lightVibrant?: SanityImagePaletteSwatch;
+  darkVibrant?: SanityImagePaletteSwatch;
+  vibrant?: SanityImagePaletteSwatch;
+  dominant?: SanityImagePaletteSwatch;
+  lightMuted?: SanityImagePaletteSwatch;
+  muted?: SanityImagePaletteSwatch;
+};
 
 export type SanityImageDimensions = {
-  _type: 'sanity.imageDimensions'
-  height?: number
-  width?: number
-  aspectRatio?: number
-}
+  _type: "sanity.imageDimensions";
+  height?: number;
+  width?: number;
+  aspectRatio?: number;
+};
 
 export type SanityImageMetadata = {
-  _type: 'sanity.imageMetadata'
-  location?: Geopoint
-  dimensions?: SanityImageDimensions
-  palette?: SanityImagePalette
-  lqip?: string
-  blurHash?: string
-  thumbHash?: string
-  hasAlpha?: boolean
-  isOpaque?: boolean
-}
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  thumbHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
+};
 
 export type SanityFileAsset = {
-  _id: string
-  _type: 'sanity.fileAsset'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  originalFilename?: string
-  label?: string
-  title?: string
-  description?: string
-  altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
-  uploadId?: string
-  path?: string
-  url?: string
-  source?: SanityAssetSourceData
-}
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
+};
 
 export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData'
-  name?: string
-  id?: string
-  url?: string
-}
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
+};
 
 export type SanityImageAsset = {
-  _id: string
-  _type: 'sanity.imageAsset'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  originalFilename?: string
-  label?: string
-  title?: string
-  description?: string
-  altText?: string
-  sha1hash?: string
-  extension?: string
-  mimeType?: string
-  size?: number
-  assetId?: string
-  uploadId?: string
-  path?: string
-  url?: string
-  metadata?: SanityImageMetadata
-  source?: SanityAssetSourceData
-}
+  _id: string;
+  _type: "sanity.imageAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  metadata?: SanityImageMetadata;
+  source?: SanityAssetSourceData;
+};
 
 export type Geopoint = {
-  _type: 'geopoint'
-  lat?: number
-  lng?: number
-  alt?: number
-}
+  _type: "geopoint";
+  lat?: number;
+  lng?: number;
+  alt?: number;
+};
 
 export type Slug = {
-  _type: 'slug'
-  current?: string
-  source?: string
-}
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
 
 export type AllSanitySchemaTypes =
   | Extra_serviceReference
+  | Premium_service
   | Package
   | Extra_service
   | SanityImageAssetReference
@@ -226,4 +249,4 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint
-  | Slug
+  | Slug;

@@ -1,12 +1,14 @@
 import { Check, Crown } from "lucide-react";
-import { getPremiumServicePackages } from "../_data/sanity/queries";
-import { Extra_service } from "@/lib/sanity/sanity.types";
-import { PremiumPackageWithExtras } from "@/lib/sanity/premium-package.types";
+import { getPremiumServices } from "../_data/sanity/queries";
+import {
+  Extra_service,
+  Premium_serviceWithExtras,
+} from "@/lib/sanity/sanity.types";
 
-export async function PremiumPackagesSection() {
-  const packages = await getPremiumServicePackages();
+export async function PremiumServicesSection() {
+  const services = await getPremiumServices();
 
-  if (packages.length === 0) {
+  if (services.length === 0) {
     return (
       <div className="rounded-lg border border-primary/30 bg-card p-8 text-center md:p-12">
         <p className="text-base text-muted-foreground md:text-lg">
@@ -19,9 +21,9 @@ export async function PremiumPackagesSection() {
 
   return (
     <div className="grid gap-6 md:grid-cols-2 md:gap-8">
-      {packages.map((pkg: PremiumPackageWithExtras) => (
+      {services.map((service: Premium_serviceWithExtras) => (
         <article
-          key={pkg._id}
+          key={service._id}
           className="flex flex-col rounded-lg border border-primary/40 bg-card transition-all duration-300 hover:border-primary hover:shadow-[0_0_40px_-15px] hover:shadow-primary/40"
         >
           <div className="border-b border-primary/30 p-6 md:p-8">
@@ -30,40 +32,40 @@ export async function PremiumPackagesSection() {
               Premium
             </div>
             <h2 className="mb-1 font-serif text-2xl font-bold md:text-3xl">
-              {pkg.package_name}
+              {service.service_name}
             </h2>
-            {pkg.description && (
+            {service.description && (
               <p className="mb-3 text-sm text-muted-foreground md:text-base">
-                {pkg.description}
+                {service.description}
               </p>
             )}
             <p className="text-2xl font-bold text-primary md:text-3xl">
-              £{pkg.price}
+              £{service.price}
             </p>
           </div>
 
           <div className="flex flex-1 flex-col gap-6 p-6 md:p-8">
-            {pkg.package_services && pkg.package_services.length > 0 && (
+            {service.package_services && service.package_services.length > 0 && (
               <ul className="space-y-2">
-                {pkg.package_services.map((service, i) => (
+                {service.package_services.map((item, i) => (
                   <li
                     key={i}
                     className="flex items-start gap-2 text-sm md:text-base"
                   >
                     <Check className="mt-0.5 size-4 shrink-0 text-primary" />
-                    <span>{service}</span>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
             )}
 
-            {pkg.extra_services && pkg.extra_services.length > 0 && (
+            {service.extra_services && service.extra_services.length > 0 && (
               <div>
                 <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                   Optional Add-ons
                 </p>
                 <ul className="space-y-2">
-                  {pkg.extra_services.map((extra: Extra_service) => (
+                  {service.extra_services.map((extra: Extra_service) => (
                     <li
                       key={extra._id}
                       className="flex items-center justify-between gap-4 rounded-md bg-secondary px-3 py-2 text-sm"

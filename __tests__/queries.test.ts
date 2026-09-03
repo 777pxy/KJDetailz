@@ -12,7 +12,7 @@ import {
   getReviews,
   getServicePackages,
   getImagesForGallery,
-  getPremiumServicePackages,
+  getPremiumServices,
 } from "@/app/_data/sanity/queries";
 
 const mockFetch = client.fetch as jest.Mock;
@@ -71,21 +71,21 @@ describe("sanity queries", () => {
     });
   });
 
-  describe("getPremiumServicePackages", () => {
-    it("returns the fetched premium packages on success", async () => {
-      const packages = [
-        { _id: "1", package_name: "Concours Detail", price: 450 },
+  describe("getPremiumServices", () => {
+    it("returns the fetched premium services on success", async () => {
+      const services = [
+        { _id: "1", service_name: "Concours Detail", price: 450 },
       ];
-      mockFetch.mockResolvedValue(packages);
+      mockFetch.mockResolvedValue(services);
 
-      await expect(getPremiumServicePackages()).resolves.toEqual(packages);
+      await expect(getPremiumServices()).resolves.toEqual(services);
     });
 
     it("returns an empty array when the fetch fails", async () => {
       mockFetch.mockRejectedValue(new Error("network error"));
       jest.spyOn(console, "error").mockImplementation(() => {});
 
-      await expect(getPremiumServicePackages()).resolves.toEqual([]);
+      await expect(getPremiumServices()).resolves.toEqual([]);
     });
   });
 });

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
 import { Crown } from "lucide-react";
-import { PremiumPackagesSection } from "../components/premium-packages-section";
+import { PremiumServicesSection } from "../components/premium-services-section";
 
 export const metadata: Metadata = {
   title: "Premium Services",
@@ -49,7 +49,7 @@ export default async function PremiumServicesPage() {
         </div>
 
         <Suspense>
-          <PremiumPackagesSection />
+          <PremiumServicesSection />
         </Suspense>
 
         <div className="flex flex-col items-center mt-16 rounded-lg border border-border bg-secondary p-8 text-center md:mt-24 md:p-12">
