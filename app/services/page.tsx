@@ -7,7 +7,9 @@ import { PackagesSection } from "../components/packages-section";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Premium valeting and detailing services from KJ Detailz.",
+  description:
+    "Premium mobile valeting and detailing services from KJ Detailz, covering Dorset, Wiltshire, Hampshire & Somerset.",
+  alternates: { canonical: "/services" },
 };
 
 export default async function ServicesPage() {
@@ -18,7 +20,7 @@ export default async function ServicesPage() {
           <div className="relative mx-auto aspect-square w-32 shrink-0 lg:w-40">
             <Image
               src="/award_badge.png"
-              alt="Award badge"
+              alt="Blandford Business Awards Winner 2026 badge"
               fill
               sizes="(max-width: 768px) 5rem, (max-width: 1024px) 6rem, 8rem"
               className="object-contain"

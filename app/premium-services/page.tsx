@@ -7,7 +7,8 @@ import { PremiumServicesSection } from "../components/premium-services-section";
 export const metadata: Metadata = {
   title: "Premium Services",
   description:
-    "Bespoke, top-tier valeting and detailing from KJ Detailz for owners who expect the very best.",
+    "Bespoke, top-tier mobile valeting and detailing from KJ Detailz across Dorset, Wiltshire, Hampshire & Somerset, for owners who expect the very best.",
+  alternates: { canonical: "/premium-services" },
 };
 
 export default async function PremiumServicesPage() {
@@ -18,7 +19,7 @@ export default async function PremiumServicesPage() {
           <div className="relative mx-auto aspect-square w-32 shrink-0 lg:w-40">
             <Image
               src="/award_badge.png"
-              alt="Award badge"
+              alt="Blandford Business Awards Winner 2026 badge"
               fill
               sizes="(max-width: 768px) 5rem, (max-width: 1024px) 6rem, 8rem"
               className="object-contain"

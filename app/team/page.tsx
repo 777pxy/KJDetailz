@@ -3,7 +3,9 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Meet the Team",
-  description: "Meet the people behind every KJ Detailz valet and detail.",
+  description:
+    "Meet the people behind every KJ Detailz mobile valet and detail across Dorset, Wiltshire, Hampshire & Somerset.",
+  alternates: { canonical: "/team" },
 };
 
 const team = [
@@ -50,7 +52,7 @@ export default function TeamPage() {
             >
               <Image
                 src="/founder_hero_image.jpg"
-                alt="Kieran Jackson"
+                alt="Kieran Jackson, founder of KJ Detailz"
                 fill
                 sizes="(max-width: 768px) 100vw, 400px"
                 className="object-cover transition-transform duration-500 scale-[1.05] group-hover:scale-[1.1]"
@@ -78,7 +80,7 @@ export default function TeamPage() {
                 <div className="relative aspect-square w-20 shrink-0 sm:w-20 md:w-24 lg:w-32">
                   <Image
                     src="/award_badge.png"
-                    alt="Award badge"
+                    alt="Blandford Business Awards Winner 2026 badge"
                     fill
                     sizes="(max-width: 768px) 5rem, (max-width: 1024px) 6rem, 8rem"
                     className="object-contain"

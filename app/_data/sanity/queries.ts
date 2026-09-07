@@ -5,6 +5,11 @@ import { cacheTag, cacheLife } from 'next/cache'
 
 const REVIEWS_QUERY = `*[_type == "customer_review" && isVisible] | order(_createdAt desc) { customer_name, body, service_type, stars }[0...3]`
 
+const REVIEW_STATS_QUERY = `{
+  "count": count(*[_type == "customer_review" && isVisible]),
+  "average": math::avg(*[_type == "customer_review" && isVisible].stars)
+}`
+
 const PACKAGETYPES_QUERY = `*[_type == "package" && isVisible] | order(price asc) {
   _id,
   package_name,
@@ -32,6 +37,23 @@ export async function getReviews(): Promise<types.Customer_review[]> {
     } catch {
         console.error("getReviews failed")
         return []
+    }
+}
+
+export type ReviewStats = {
+    count: number;
+    average: number;
+};
+
+export async function getReviewStats(): Promise<ReviewStats> {
+    "use cache"
+    cacheTag('sanity')
+    cacheLife('halfDay')
+    try {
+        return await client.fetch(REVIEW_STATS_QUERY)
+    } catch {
+        console.error("getReviewStats failed")
+        return { count: 0, average: 0 }
     }
 }
 

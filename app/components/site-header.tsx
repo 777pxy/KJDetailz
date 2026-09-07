@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/team", label: "Meet the Team" },
+  { href: "/areas", label: "Areas We Cover" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -31,7 +32,7 @@ export function SiteHeader() {
         <Link href="/" className="inline-flex items-center">
           <Image
             src="/KJ_logo_HD.png"
-            alt="KJ Detailz"
+            alt="KJ Detailz logo"
             width={120}
             height={75}
             className="object-contain"
@@ -95,7 +96,7 @@ export function SiteHeader() {
               >
                 <Image
                   src="/KJ_logo_HD.png"
-                  alt="KJ Detailz"
+                  alt="KJ Detailz logo"
                   width={80}
                   height={75}
                   className="object-contain"

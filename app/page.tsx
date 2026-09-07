@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
@@ -14,6 +15,13 @@ import { Suspense } from "react";
 import ReviewsSection from "@/app/components/review-section";
 import GallerySection from "@/app/components/gallery-section";
 
+export const metadata: Metadata = {
+  title: "KJ Detailz",
+  description:
+    "Premium mobile car valeting and detailing serving Dorset, Wiltshire, Hampshire & Somerset — from Bournemouth and Poole to Salisbury and Wincanton.",
+  alternates: { canonical: "/" },
+};
+
 const trustSignals: {
   Icon: LucideIcon;
   label: string;
@@ -22,7 +30,7 @@ const trustSignals: {
   {
     Icon: MapPin,
     label: "Based in Dorset",
-    sub: "Serving the local community",
+    sub: "Serving Dorset, Wiltshire, Hampshire & Somerset",
   },
   {
     Icon: ShieldCheck,
@@ -156,7 +164,7 @@ export default async function Home() {
             <div className="relative mx-auto aspect-square w-32 shrink-0 lg:w-40">
               <Image
                 src="/award_badge.png"
-                alt="Award badge"
+                alt="Blandford Business Awards Winner 2026 badge"
                 fill
                 sizes="(max-width: 768px) 5rem, (max-width: 1024px) 6rem, 8rem"
                 className="object-contain"
@@ -194,6 +202,35 @@ export default async function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="border-y border-primary/30 bg-[#161008] px-4 py-12 md:px-8 md:py-16">
+        <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-6 text-center md:flex-row md:justify-between md:gap-8 md:text-left">
+          <div>
+            <div className="mb-3 inline-flex items-center gap-2 text-primary">
+              <MapPin className="size-5" aria-hidden="true" />
+              <span className="text-xs font-semibold uppercase tracking-[0.2em]">
+                Areas We Cover
+              </span>
+            </div>
+            <h2 className="mb-2 font-serif text-2xl font-bold md:text-3xl lg:text-4xl">
+              Mobile across Dorset, Wiltshire, Hampshire &amp; Somerset
+            </h2>
+            <p className="text-sm text-muted-foreground md:text-base">
+              See the full list of towns we visit for a valet or detail.
+            </p>
+          </div>
+          <Link
+            href="/areas"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:brightness-110 md:text-base"
+          >
+            View Areas We Cover
+            <ArrowRight
+              className="size-4 transition-transform duration-300 group-hover:translate-x-1 md:size-5"
+              aria-hidden="true"
+            />
+          </Link>
         </div>
       </section>
 

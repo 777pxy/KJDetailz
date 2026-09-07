@@ -5,6 +5,7 @@ const footerLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/team", label: "Meet the Team" },
+  { href: "/areas", label: "Areas We Cover" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -17,7 +18,7 @@ export function SiteFooter() {
           <div className="flex-1 flex justify-center md:justify-start">
             <Image
               src="/KJ_logo_HD.png"
-              alt="KJ Detailz"
+              alt="KJ Detailz logo"
               width={80}
               height={75}
               className="object-contain"

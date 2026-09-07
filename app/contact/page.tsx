@@ -6,7 +6,9 @@ import { FaFacebookMessenger, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Message or call KJ Detailz to book a valet or detail.",
+  description:
+    "Message or call KJ Detailz to book a mobile valet or detail across Dorset, Wiltshire, Hampshire & Somerset.",
+  alternates: { canonical: "/contact" },
 };
 
 const rawPhone = process.env.PHONE_NUMBER ?? "";
@@ -129,7 +131,7 @@ export default function ContactPage() {
               <div className="relative aspect-square w-32 shrink-0 lg:w-40">
                 <Image
                   src="/award_badge.png"
-                  alt="Award badge"
+                  alt="Blandford Business Awards Winner 2026 badge"
                   fill
                   sizes="(max-width: 768px) 5rem, (max-width: 1024px) 6rem, 8rem"
                   className="object-contain"
