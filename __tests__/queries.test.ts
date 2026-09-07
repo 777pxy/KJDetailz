@@ -10,6 +10,7 @@ jest.mock("next/cache", () => ({
 import { client } from "@/src/sanity/sanity";
 import {
   getReviews,
+  getReviewStats,
   getServicePackages,
   getImagesForGallery,
   getPremiumServices,
@@ -36,6 +37,22 @@ describe("sanity queries", () => {
       jest.spyOn(console, "error").mockImplementation(() => {});
 
       await expect(getReviews()).resolves.toEqual([]);
+    });
+  });
+
+  describe("getReviewStats", () => {
+    it("returns the fetched stats on success", async () => {
+      const stats = { count: 12, average: 4.8 };
+      mockFetch.mockResolvedValue(stats);
+
+      await expect(getReviewStats()).resolves.toEqual(stats);
+    });
+
+    it("returns a zeroed fallback when the fetch fails", async () => {
+      mockFetch.mockRejectedValue(new Error("network error"));
+      jest.spyOn(console, "error").mockImplementation(() => {});
+
+      await expect(getReviewStats()).resolves.toEqual({ count: 0, average: 0 });
     });
   });
 

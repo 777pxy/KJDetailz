@@ -19,7 +19,7 @@ export default async function GallerySection() {
                 .quality(80)
                 .format("webp")
                 .url()}
-              alt={item.image_name ?? "Gallery image"}
+              alt={item.image_name ?? "KJ Detailz valet and detailing work"}
               fill
               sizes="(max-width: 768px) 50vw, 33vw"
               className="object-cover transition-transform duration-300 group-hover:scale-105"
