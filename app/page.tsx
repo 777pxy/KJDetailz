@@ -145,12 +145,13 @@ export default async function Home() {
             style={{ minHeight: 420 }}
           >
             <Image
-              src="/founder_hero_image1.jpg"
+              src="/founder_hero_image.jpg"
               alt=""
               aria-hidden="true"
               fill
               sizes="(max-width: 768px) 100vw, 660px"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
+              style={{ objectPosition: "center 30%" }}
             />
             <div className="absolute inset-0 bg-background/55" />
             <div className="relative flex h-full flex-col justify-end p-8 md:p-10">
