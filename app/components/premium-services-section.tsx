@@ -34,7 +34,8 @@ export async function PremiumServicesSection() {
         return (
           <div
             key={service._id}
-            className="grid grid-cols-1 border-b border-border lg:grid-cols-2"
+            id={service._id}
+            className="grid grid-cols-1 border-b border-border scroll-mt-[84px] lg:grid-cols-2"
           >
             {image?.image ? (
               <div

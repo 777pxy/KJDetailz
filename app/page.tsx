@@ -62,7 +62,7 @@ async function PremiumPreview() {
         return (
           <Link
             key={service._id}
-            href="/premium-services"
+            href={`/premium-services#${service._id}`}
             className="group relative block overflow-hidden text-left"
             style={{ aspectRatio: "3/4" }}
           >
