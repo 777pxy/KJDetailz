@@ -92,8 +92,8 @@ export default function ContactPage() {
               Let&apos;s get your vehicle booked in.
             </h1>
           </div>
-          <div className="hidden shrink-0 md:block">
-            <AwardBadge />
+          <div className="hidden shrink-0 md:mr-8 md:block">
+            <AwardBadge size="clamp(4.5rem, 9vw, 8.5rem)" />
           </div>
         </div>
       </section>

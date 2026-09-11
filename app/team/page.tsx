@@ -52,22 +52,20 @@ export default function TeamPage() {
               key={member.name}
               className="grid grid-cols-1 gap-14 lg:grid-cols-2 xl:gap-20"
             >
-              <div className="relative">
-                <div
-                  className="relative overflow-hidden"
-                  style={{ aspectRatio: "4/5" }}
-                >
-                  <Image
-                    src="/founder_hero_image.jpg"
-                    alt={member.name}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 650px"
-                    className="object-cover"
-                    style={{ objectPosition: "center 0%" }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/18 to-transparent" />
-                </div>
-                <div className="absolute -bottom-3 -right-3 hidden lg:block">
+              <div
+                className="relative overflow-hidden"
+                style={{ aspectRatio: "4/5" }}
+              >
+                <Image
+                  src="/founder_hero_image.jpg"
+                  alt={member.name}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 650px"
+                  className="object-cover"
+                  style={{ objectPosition: "center 0%" }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/18 to-transparent" />
+                <div className="absolute bottom-2 right-2 hidden lg:block">
                   <AwardBadge />
                 </div>
               </div>

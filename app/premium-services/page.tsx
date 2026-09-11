@@ -46,8 +46,8 @@ export default function PremiumServicesPage() {
               Scoped in person. Quoted individually. Applied with precision.
             </p>
           </div>
-          <div className="hidden shrink-0 lg:block">
-            <AwardBadge />
+          <div className="hidden shrink-0 lg:mr-8 lg:block">
+            <AwardBadge size="clamp(4.5rem, 9vw, 8.5rem)" />
           </div>
         </div>
       </section>
