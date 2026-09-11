@@ -23,7 +23,7 @@ export default async function GallerySection() {
                 .url()}
               alt={item.image_name ?? "KJ Detailz valet and detailing work"}
               fill
-              sizes="(max-width: 768px) 50vw, 25vw"
+              sizes="(max-width: 768px) 50vw, 330px"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           )}

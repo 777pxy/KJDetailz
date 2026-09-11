@@ -61,7 +61,7 @@ export default function TeamPage() {
                     src="/founder_hero_image.jpg"
                     alt={member.name}
                     fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    sizes="(max-width: 1024px) 100vw, 650px"
                     className="object-cover"
                     style={{ objectPosition: "center 0%" }}
                   />
@@ -106,29 +106,6 @@ export default function TeamPage() {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className="border-y border-border bg-card px-4 py-16 md:px-8">
-        <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-8 md:flex-row">
-          <div className="max-w-lg">
-            <p className="mb-3 text-[11px] uppercase tracking-[0.32em] text-primary">
-              Work With Us
-            </p>
-            <h2 className="mb-2 font-serif text-3xl text-foreground">
-              We&apos;re always looking for exceptional people.
-            </h2>
-            <p className="text-sm leading-relaxed text-foreground/42">
-              If you share our standards and take pride in genuine
-              craftsmanship, we&apos;d like to hear from you.
-            </p>
-          </div>
-          <a
-            href="/contact"
-            className="flex shrink-0 items-center gap-2 self-end text-[11px] uppercase tracking-[0.22em] text-primary"
-          >
-            Get in touch <span>→</span>
-          </a>
         </div>
       </section>
 

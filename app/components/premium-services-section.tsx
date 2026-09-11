@@ -46,7 +46,7 @@ export async function PremiumServicesSection() {
                   src={urlFor(image.image).width(900).height(700).quality(80).format("webp").url()}
                   alt={image.image_name ?? service.service_name ?? "Premium detailing service"}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 100vw, 670px"
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-background/15" />

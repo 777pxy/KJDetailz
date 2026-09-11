@@ -71,7 +71,7 @@ async function PremiumPreview() {
                 src={urlFor(image.image).width(600).height(800).quality(80).format("webp").url()}
                 alt={image.image_name ?? service.service_name ?? ""}
                 fill
-                sizes="(max-width: 1024px) 50vw, 25vw"
+                sizes="(max-width: 1024px) 50vw, 330px"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             ) : (
@@ -149,7 +149,7 @@ export default async function Home() {
               alt=""
               aria-hidden="true"
               fill
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 768px) 100vw, 660px"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-background/55" />
