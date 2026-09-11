@@ -6,27 +6,35 @@ export default async function GallerySection() {
   const images = await getImagesForGallery();
 
   return (
-    <div className="mb-6 grid grid-cols-2 gap-3 md:mb-8 md:grid-cols-3 md:gap-4">
+    <div className="grid grid-cols-2 gap-2.5 md:grid-cols-4">
       {images.map((item) => (
         <div
           key={item._id}
-          className="group relative aspect-square cursor-pointer overflow-hidden rounded-lg bg-muted"
+          className="group relative overflow-hidden"
+          style={{ aspectRatio: "4/3" }}
         >
           {item.image && (
             <Image
               src={urlFor(item.image)
-                .width(800)
+                .width(600)
+                .height(450)
                 .quality(80)
                 .format("webp")
                 .url()}
               alt={item.image_name ?? "KJ Detailz valet and detailing work"}
               fill
-              sizes="(max-width: 768px) 50vw, 33vw"
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 768px) 50vw, 25vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-transparent opacity-30" />
-          <div className="absolute right-2 top-2 size-6 border-r-2 border-t-2 border-transparent transition-all duration-300 group-hover:border-primary md:size-8" />
+          <div className="absolute inset-0 bg-background/0 transition-all duration-500 group-hover:bg-background/30" />
+          {item.image_name ? (
+            <div className="absolute bottom-0 left-0 translate-y-2 p-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+              <span className="bg-background/85 px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-primary">
+                {item.image_name}
+              </span>
+            </div>
+          ) : null}
         </div>
       ))}
     </div>

@@ -1,17 +1,21 @@
-import { Check, Crown } from "lucide-react";
-import { getPremiumServices } from "../_data/sanity/queries";
+import Image from "next/image";
+import { getImagesForGallery, getPremiumServices } from "../_data/sanity/queries";
 import {
   Extra_service,
   Premium_serviceWithExtras,
 } from "@/lib/sanity/sanity.types";
+import { urlFor } from "@/src/sanity/sanity";
 
 export async function PremiumServicesSection() {
-  const services = await getPremiumServices();
+  const [services, galleryImages] = await Promise.all([
+    getPremiumServices(),
+    getImagesForGallery(),
+  ]);
 
   if (services.length === 0) {
     return (
-      <div className="rounded-lg border border-primary/30 bg-card p-8 text-center md:p-12">
-        <p className="text-base text-muted-foreground md:text-lg">
+      <div className="border border-primary/30 p-8 text-center md:p-12">
+        <p className="text-base text-foreground/50 md:text-lg">
           Our premium services are being finalised. Get in touch to discuss a
           bespoke package for your vehicle.
         </p>
@@ -20,76 +24,99 @@ export async function PremiumServicesSection() {
   }
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 md:gap-8">
-      {services.map((service: Premium_serviceWithExtras) => (
-        <article
-          key={service._id}
-          className="flex flex-col rounded-lg border border-primary/40 bg-card transition-all duration-300 hover:border-primary hover:shadow-[0_0_40px_-15px] hover:shadow-primary/40"
-        >
-          <div className="border-b border-primary/30 p-6 md:p-8">
-            <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-primary/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
-              <Crown className="size-3.5" aria-hidden="true" />
-              Premium
-            </div>
-            <h2 className="mb-1 font-serif text-2xl font-bold md:text-3xl">
-              {service.service_name}
-            </h2>
-            {service.description && (
-              <p className="mb-3 text-sm text-muted-foreground md:text-base">
-                {service.description}
+    <div className="border-t border-border">
+      {services.map((service: Premium_serviceWithExtras, i) => {
+        const image =
+          galleryImages.length > 0
+            ? galleryImages[i % galleryImages.length]
+            : undefined;
+
+        return (
+          <div
+            key={service._id}
+            className="grid grid-cols-1 border-b border-border lg:grid-cols-2"
+          >
+            {image?.image ? (
+              <div
+                className={`relative overflow-hidden ${i % 2 === 1 ? "lg:order-2" : ""}`}
+                style={{ minHeight: 360 }}
+              >
+                <Image
+                  src={urlFor(image.image).width(900).height(700).quality(80).format("webp").url()}
+                  alt={image.image_name ?? service.service_name ?? "Premium detailing service"}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-background/15" />
+              </div>
+            ) : null}
+
+            <div
+              className={`flex flex-col justify-center p-10 lg:p-16 ${
+                image?.image && i % 2 === 1 ? "lg:order-1" : ""
+              }`}
+            >
+              <div className="mb-6 h-px w-8 bg-primary" />
+              <p className="mb-3 text-[11px] uppercase tracking-[0.22em] text-primary">
+                Premium
               </p>
-            )}
-            <p className="text-2xl font-bold text-primary md:text-3xl">
-              £{service.price}
-            </p>
-          </div>
-
-          <div className="flex flex-1 flex-col gap-6 p-6 md:p-8">
-            {service.package_services && service.package_services.length > 0 && (
-              <ul className="space-y-2">
-                {service.package_services.map((item, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-2 text-sm md:text-base"
-                  >
-                    <Check className="mt-0.5 size-4 shrink-0 text-primary" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            {service.extra_services && service.extra_services.length > 0 && (
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                  Optional Add-ons
+              <h2 className="mb-3 font-serif text-3xl leading-snug text-foreground md:text-4xl">
+                {service.service_name}
+              </h2>
+              {service.description && (
+                <p className="mb-6 text-sm leading-relaxed text-foreground/55">
+                  {service.description}
                 </p>
-                <ul className="space-y-2">
+              )}
+
+              {service.package_services && service.package_services.length > 0 && (
+                <ul className="mb-6 space-y-1.5">
+                  {service.package_services.map((item, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-2.5 text-sm text-foreground/55"
+                    >
+                      <span className="mt-0.5 shrink-0 text-xs text-primary">
+                        —
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {service.extra_services && service.extra_services.length > 0 && (
+                <ul className="mb-6 space-y-2">
                   {service.extra_services.map((extra: Extra_service) => (
                     <li
                       key={extra._id}
-                      className="flex items-center justify-between gap-4 rounded-md bg-secondary px-3 py-2 text-sm"
+                      className="flex items-center justify-between gap-4 border border-border px-3 py-2 text-sm"
                     >
-                      <span className="text-foreground/80">
-                        {extra.description}
-                      </span>
-                      <span className="shrink-0 font-semibold text-primary">
+                      <span className="text-foreground/80">{extra.description}</span>
+                      <span className="shrink-0 font-medium text-primary">
                         +£{extra.price}
                       </span>
                     </li>
                   ))}
                 </ul>
+              )}
+
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-primary">
+                  £{service.price}
+                </span>
+                <a
+                  href="/contact"
+                  className="border border-primary/35 px-5 py-2.5 text-[11px] uppercase tracking-[0.22em] text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+                >
+                  Enquire
+                </a>
               </div>
-            )}
-            <a
-              href="/contact"
-              className="mt-auto block rounded-lg bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground transition-all duration-300 hover:brightness-110 md:text-base"
-            >
-              Enquire about this service
-            </a>
+            </div>
           </div>
-        </article>
-      ))}
+        );
+      })}
     </div>
   );
 }

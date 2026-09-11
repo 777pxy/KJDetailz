@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { serviceAreaCounties, townsByCounty } from "@/lib/seo/service-areas";
+import { ContactBanner } from "@/app/components/contact-banner";
 
 export const metadata: Metadata = {
   title: "Areas We Cover",
@@ -22,53 +22,48 @@ const countyBlurb: Record<string, string> = {
 
 export default function AreasPage() {
   return (
-    <section className="min-h-screen px-4 py-16 md:px-8 md:py-28">
-      <div className="mx-auto max-w-[1100px]">
-        <div className="mb-14 text-center md:mb-20">
-          <div className="relative mx-auto aspect-square w-32 shrink-0 lg:w-40">
-            <Image
-              src="/award_badge.png"
-              alt="Blandford Business Awards Winner 2026 badge"
-              fill
-              sizes="(max-width: 768px) 5rem, (max-width: 1024px) 6rem, 8rem"
-              className="object-contain"
-            />
-          </div>
-          <p className="mb-2 pt-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Service Area
+    <>
+      <section className="border-b border-border px-4 pb-16 pt-[110px] md:px-8">
+        <div className="mx-auto max-w-[1400px]">
+          <p className="mb-4 text-[11px] uppercase tracking-[0.32em] text-primary">
+            Coverage
           </p>
-          <h1 className="mb-4 font-serif text-4xl font-bold leading-tight md:mb-6 md:text-5xl lg:text-6xl">
-            Areas We Cover
+          <h1 className="max-w-xl font-serif text-[clamp(2.4rem,5vw,4.5rem)] leading-[1.06] text-foreground">
+            Areas we cover.
           </h1>
-          <p className="text-lg text-muted-foreground md:text-xl">
-            Fully mobile valeting and detailing across Dorset, Wiltshire,
-            Hampshire &amp; Somerset.
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-foreground/45">
+            Based near Blandford Forum in Dorset, we travel throughout the
+            South West. If you&apos;re unsure whether we cover your area, just
+            ask.
           </p>
         </div>
+      </section>
 
-        <div className="space-y-10 md:space-y-14">
+      <section className="px-4 py-20 md:px-8">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-5 md:grid-cols-2">
           {serviceAreaCounties.map((county) => {
             const towns = townsByCounty(county);
 
             return (
               <div
                 key={county}
-                className="rounded-lg border border-border bg-card p-6 md:p-8"
+                className="border border-border p-8 transition-colors duration-300 hover:border-primary/15"
               >
-                <h2 className="mb-2 font-serif text-2xl font-bold md:text-3xl">
+                <div className="mb-5 h-px w-6 bg-primary" />
+                <h2 className="mb-3 font-serif text-3xl text-foreground">
                   {county}
                 </h2>
-                <p className="mb-5 text-sm leading-relaxed text-foreground/85 md:text-base">
+                <p className="mb-6 text-sm leading-relaxed text-foreground/60">
                   {countyBlurb[county]}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {towns.map((area) => (
                     <span
                       key={area.town}
-                      className="rounded-md border border-border/60 bg-muted/40 px-3 py-1.5 text-xs text-muted-foreground md:text-sm"
+                      className="border border-white/7 px-3 py-1.5 text-xs text-foreground/50 transition-all duration-200 hover:border-primary/28 hover:text-foreground/75"
                     >
                       {area.town}{" "}
-                      <span className="text-muted-foreground/60">
+                      <span className="text-foreground/40">
                         ({area.postcodeDistricts.join(", ")})
                       </span>
                     </span>
@@ -78,22 +73,47 @@ export default function AreasPage() {
             );
           })}
         </div>
+      </section>
 
-        <div className="flex flex-col items-center mt-16 rounded-lg border border-border bg-secondary p-8 text-center md:mt-24 md:p-12">
-          <h2 className="mb-4 font-serif text-2xl font-bold md:mb-6 md:text-3xl">
-            Don&apos;t see your town listed?
-          </h2>
-          <div className="flex flex-row mb-6 text-base text-muted-foreground md:mb-8 md:text-lg">
-            <p className="">Get in touch and we&apos;ll let you know&nbsp;</p>
+      <section className="border-y border-border bg-card px-4 py-16 md:px-8">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 md:grid-cols-3">
+          <div>
+            <h3 className="mb-3 text-xs uppercase tracking-[0.15em] text-foreground">
+              Home Base
+            </h3>
+            <p className="text-sm leading-relaxed text-foreground/42">
+              We&apos;re based near Blandford Forum in Dorset, covering the
+              surrounding county as our primary area.
+            </p>
+          </div>
+          <div>
+            <h3 className="mb-3 text-xs uppercase tracking-[0.15em] text-foreground">
+              Travel Charge
+            </h3>
+            <p className="text-sm leading-relaxed text-foreground/42">
+              A modest mileage contribution may apply for locations further
+              afield — always confirmed before booking.
+            </p>
+          </div>
+          <div>
+            <h3 className="mb-3 text-xs uppercase tracking-[0.15em] text-foreground">
+              Not Sure?
+            </h3>
+            <p className="mb-4 text-sm leading-relaxed text-foreground/42">
+              If your location isn&apos;t listed, just ask. We regularly
+              travel outside listed areas for Premium Service bookings.
+            </p>
             <a
               href="/contact"
-              className="text-primary hover:underline hover:text-xl transition-all duration-200"
+              className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] text-primary"
             >
-              here.
+              Ask us <span>→</span>
             </a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <ContactBanner />
+    </>
   );
 }

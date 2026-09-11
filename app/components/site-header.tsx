@@ -1,16 +1,16 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toWhatsAppHref } from "@/lib/phone";
 
 const navLinks = [
-  { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
-  { href: "/team", label: "Meet the Team" },
-  { href: "/areas", label: "Areas We Cover" },
+  { href: "/premium-services", label: "Premium" },
+  { href: "/team", label: "Team" },
+  { href: "/areas", label: "Areas" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -22,19 +22,35 @@ export function isActiveLink(href: string, pathname: string) {
   return pathname.startsWith(href);
 }
 
-export function SiteHeader() {
+export function SiteHeader({ phone }: { phone?: string }) {
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const rawPhone = phone ?? "";
 
   return (
-    <header className="sticky top-0 z-50 h-[88px] border-b border-border bg-background px-4 md:px-8">
-      <div className="mx-auto flex h-full max-w-[1600px] items-center justify-between">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-500 ${
+        scrolled || menuOpen
+          ? "border-b border-border bg-background/96 backdrop-blur-sm"
+          : "border-b border-transparent bg-background"
+      }`}
+    >
+      <div className="mx-auto flex h-[68px] max-w-[1400px] items-center justify-between px-4 md:px-8">
         <Link href="/" className="inline-flex items-center">
           <Image
             src="/KJ_logo_HD.png"
             alt="KJ Detailz logo"
-            width={120}
-            height={75}
+            width={96}
+            height={60}
             className="object-contain"
           />
         </Link>
@@ -42,15 +58,14 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
           {navLinks.map((link) => {
             const active = isActiveLink(link.href, pathname);
-
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative pb-1 text-sm tracking-wide transition-colors ${
+                className={`text-[11px] uppercase tracking-[0.18em] transition-colors duration-200 ${
                   active
-                    ? "text-foreground after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-primary"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "text-primary"
+                    : "text-foreground/55 hover:text-foreground"
                 }`}
               >
                 {link.label}
@@ -59,89 +74,91 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <button
-          type="button"
-          className="inline-flex size-11 items-center justify-center text-foreground transition-colors hover:text-primary md:hidden"
-          aria-controls="mobile-navigation"
-          aria-expanded={mobileMenuOpen}
-          aria-label="Open navigation menu"
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          <Menu className="size-6" aria-hidden="true" />
-        </button>
-      </div>
+        <div className="flex items-center gap-5">
+          {rawPhone ? (
+            <a
+              href={`tel:${rawPhone}`}
+              className="hidden text-[11px] uppercase tracking-[0.15em] text-foreground/40 transition-colors duration-200 hover:text-primary md:block"
+            >
+              {rawPhone}
+            </a>
+          ) : null}
+          <Link
+            href="/contact"
+            className="hidden border border-primary/60 px-5 py-2 text-[11px] uppercase tracking-[0.18em] text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground md:block"
+          >
+            Book Now
+          </Link>
 
-      {mobileMenuOpen ? (
-        <div
-          className="fixed inset-0 z-50 md:hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation menu"
-        >
           <button
             type="button"
-            className="absolute inset-0 bg-black/60"
-            aria-label="Close navigation menu"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-          <div
-            id="mobile-navigation"
-            className="absolute right-0 top-0 flex h-full w-[min(300px,85vw)] flex-col border-l border-white/10 bg-[#111111] px-8 pb-8 pt-10 shadow-2xl"
+            className="flex h-[14px] w-5 flex-col justify-between p-1 md:hidden"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
           >
-            <div className="mb-10 flex items-center justify-between gap-4">
-              <Link
-                href="/"
-                className="inline-flex items-center"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Image
-                  src="/KJ_logo_HD.png"
-                  alt="KJ Detailz logo"
-                  width={80}
-                  height={75}
-                  className="object-contain"
-                />
-              </Link>
-              <button
-                type="button"
-                className="inline-flex size-10 items-center justify-center text-foreground transition-colors hover:text-primary"
-                aria-label="Close navigation menu"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <X className="size-5" aria-hidden="true" />
-              </button>
-            </div>
-
-            <nav className="flex flex-col gap-1" aria-label="Mobile primary">
-              {navLinks.map((link) => {
-                const active = isActiveLink(link.href, pathname);
-
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`group flex items-center gap-3 rounded-md px-3 py-3 text-base tracking-wide transition-all duration-200 ${
-                      active
-                        ? "bg-primary/10 text-primary"
-                        : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
-                    }`}
-                  >
-                    {active ? (
-                      <span className="h-4 w-1 shrink-0 rounded-full bg-primary" />
-                    ) : null}
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            <div className="my-8 border-t border-white/10" />
-
-
-          </div>
+            <span
+              className={`h-px w-full origin-center bg-foreground transition-all duration-300 ${
+                menuOpen ? "translate-y-[6.5px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`h-px w-full bg-foreground transition-all duration-300 ${
+                menuOpen ? "scale-x-0 opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`h-px w-full origin-center bg-foreground transition-all duration-300 ${
+                menuOpen ? "-translate-y-[6.5px] -rotate-45" : ""
+              }`}
+            />
+          </button>
         </div>
-      ) : null}
+      </div>
+
+      <div
+        id="mobile-navigation"
+        className={`overflow-hidden transition-all duration-500 md:hidden ${
+          menuOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <nav
+          className="flex flex-col gap-5 border-t border-border bg-background/98 px-4 py-7"
+          aria-label="Mobile primary"
+        >
+          {navLinks.map((link) => {
+            const active = isActiveLink(link.href, pathname);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className={`text-left text-xs uppercase tracking-[0.18em] transition-colors ${
+                  active ? "text-primary" : "text-foreground/60"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+          <div className="flex flex-col gap-3 border-t border-border pt-4">
+            {rawPhone ? (
+              <a href={`tel:${rawPhone}`} className="text-xs tracking-wide text-foreground/40">
+                {rawPhone}
+              </a>
+            ) : null}
+            {rawPhone ? (
+              <a
+                href={toWhatsAppHref(rawPhone)}
+                className="text-xs uppercase tracking-[0.18em] text-primary"
+              >
+                Book via WhatsApp →
+              </a>
+            ) : null}
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }
