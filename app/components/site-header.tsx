@@ -92,27 +92,29 @@ export function SiteHeader({ phone }: { phone?: string }) {
 
           <button
             type="button"
-            className="flex h-[14px] w-5 flex-col justify-between p-1 md:hidden"
+            className="-mr-2.5 flex h-11 w-11 flex-col items-center justify-center md:hidden"
             onClick={() => setMenuOpen((open) => !open)}
             aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
           >
-            <span
-              className={`h-px w-full origin-center bg-foreground transition-all duration-300 ${
-                menuOpen ? "translate-y-[6.5px] rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`h-px w-full bg-foreground transition-all duration-300 ${
-                menuOpen ? "scale-x-0 opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`h-px w-full origin-center bg-foreground transition-all duration-300 ${
-                menuOpen ? "-translate-y-[6.5px] -rotate-45" : ""
-              }`}
-            />
+            <span className="flex w-6 flex-col justify-between gap-[7px]">
+              <span
+                className={`h-0.5 w-full origin-center rounded-full bg-foreground transition-all duration-300 ${
+                  menuOpen ? "translate-y-[9px] rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`h-0.5 w-full rounded-full bg-foreground transition-all duration-300 ${
+                  menuOpen ? "scale-x-0 opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`h-0.5 w-full origin-center rounded-full bg-foreground transition-all duration-300 ${
+                  menuOpen ? "-translate-y-[9px] -rotate-45" : ""
+                }`}
+              />
+            </span>
           </button>
         </div>
       </div>

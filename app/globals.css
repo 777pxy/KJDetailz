@@ -116,10 +116,6 @@
     scrollbar-color: transparent transparent;
   }
 
-  *:hover {
-    scrollbar-color: rgba(242, 239, 233, 0.15) transparent;
-  }
-
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -134,7 +130,16 @@
     border-radius: 4px;
   }
 
-  *:hover::-webkit-scrollbar-thumb {
-    background: rgba(242, 239, 233, 0.15);
+  /* Scoped to real pointer/hover devices only: an unscoped `*:hover` rule
+     makes WebKit treat every element as hover-capable, which on iOS Safari
+     makes touch taps require two taps (hover, then click) instead of one. */
+  @media (hover: hover) and (pointer: fine) {
+    *:hover {
+      scrollbar-color: rgba(242, 239, 233, 0.15) transparent;
+    }
+
+    *:hover::-webkit-scrollbar-thumb {
+      background: rgba(242, 239, 233, 0.15);
+    }
   }
 }
