@@ -86,17 +86,20 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-3 pt-6 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+        <div className="relative flex flex-col items-center gap-3 pt-6 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
           <p className="text-xs text-foreground/20">
             &copy; 2026 KJ Detailz. All rights reserved.
           </p>
-          <p className="flex items-center gap-1 text-xs text-foreground/20">
-            <span>Fully insured · Award-winning · Dorset, UK · Website by</span>
+          <p className="text-xs text-foreground/20">
+            Fully insured · Award-winning · Dorset, UK
+          </p>
+          <p className="flex items-center gap-1 text-md text-foreground/20 sm:absolute sm:left-1/2 sm:-translate-x-1/2">
+            <span>Website by</span>
             <a
               href={process.env.WEBSITE_CREATOR_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-serif italic text-foreground/40 transition-colors duration-300 hover:text-primary"
+              className="footer-signature font-serif italic"
             >
               Praj Yakha
             </a>
