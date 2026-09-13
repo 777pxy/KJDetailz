@@ -13,7 +13,7 @@ import { ContactBanner } from "@/app/components/contact-banner";
 export const metadata: Metadata = {
   title: "KJ Detailz",
   description:
-    "Premium mobile car valeting and detailing serving Dorset, Wiltshire, Hampshire & Somerset — from Bournemouth and Poole to Salisbury and Wincanton.",
+    "Premium mobile car valeting and detailing serving Dorset, Wiltshire, Hampshire & Somerset, from Bournemouth and Poole to Salisbury and Wincanton.",
   alternates: { canonical: "/" },
 };
 
@@ -45,7 +45,7 @@ async function PremiumPreview() {
   if (services.length === 0) {
     return (
       <p className="text-sm leading-relaxed text-foreground/45">
-        Our premium services are being finalised — get in touch to discuss a
+        Our premium services are being finalised. Get in touch to discuss a
         bespoke package for your vehicle.
       </p>
     );
@@ -113,8 +113,8 @@ export default async function Home() {
                 should be done.
               </h1>
             </div>
-            <div className="hidden pt-2 md:block">
-              <AwardBadge />
+            <div className="hidden pt-2 md:mr-8 md:block">
+              <AwardBadge size="clamp(4.5rem, 9vw, 8.5rem)" />
             </div>
           </div>
 
@@ -164,8 +164,8 @@ export default async function Home() {
                 behind the detail.
               </h2>
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-foreground/50">
-                Hands-on experience across cars, vans, caravans and motorhomes
-                — applied to every vehicle we touch.
+                Hands-on experience across cars, vans, caravans and motorhomes,
+                applied to every vehicle we touch.
               </p>
               <span className="mt-6 flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary">
                 Our story <span>→</span>
@@ -190,7 +190,7 @@ export default async function Home() {
                 detailing packages.
               </h2>
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-foreground/50">
-                From a thorough mini valet to full paint correction — every
+                From a thorough mini valet to full paint correction, every
                 vehicle, every budget, no compromise on quality.
               </p>
               <span className="mt-6 flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary">

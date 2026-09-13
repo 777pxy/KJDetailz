@@ -20,7 +20,7 @@ const processSteps = [
   {
     step: "02",
     title: "Vehicle Assessment",
-    desc: "We assess the paint and cabin in person before providing a tailored quote — no surprises.",
+    desc: "We assess the paint and cabin in person before providing a tailored quote, no surprises.",
   },
   {
     step: "03",

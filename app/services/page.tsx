@@ -23,7 +23,7 @@ export default async function ServicesPage() {
             Detailing packages for every vehicle.
           </h1>
           <p className="mt-6 max-w-lg text-base leading-relaxed text-foreground/45">
-            From a thorough mini valet to specialist treatments — transparent
+            From a thorough mini valet to specialist treatments, transparent
             pricing, no hidden charges. All services are fully mobile; we come
             to you.
           </p>
@@ -49,7 +49,7 @@ export default async function ServicesPage() {
             </h2>
             <p className="text-sm leading-relaxed text-foreground/45">
               Our Premium Services tier offers multi-stage paint correction,
-              professional ceramic coatings, and full interior restorations —
+              professional ceramic coatings, and full interior restorations,
               each treatment individually scoped and quoted for your specific
               vehicle.
             </p>

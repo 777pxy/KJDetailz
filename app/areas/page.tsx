@@ -92,7 +92,7 @@ export default function AreasPage() {
             </h3>
             <p className="text-sm leading-relaxed text-foreground/42">
               A modest mileage contribution may apply for locations further
-              afield — always confirmed before booking.
+              afield, always confirmed before booking.
             </p>
           </div>
           <div>

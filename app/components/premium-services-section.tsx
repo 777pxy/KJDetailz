@@ -79,7 +79,7 @@ export async function PremiumServicesSection() {
                       className="flex items-start gap-2.5 text-sm text-foreground/55"
                     >
                       <span className="mt-0.5 shrink-0 text-xs text-primary">
-                        —
+                        -
                       </span>
                       {item}
                     </li>

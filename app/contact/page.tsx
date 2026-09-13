@@ -25,7 +25,7 @@ const messageChannels: Channel[] = [
   {
     icon: FaWhatsapp,
     label: "WhatsApp",
-    sub: "Message directly — fastest response",
+    sub: "Message directly for the fastest response",
     href: toWhatsAppHref(rawPhone),
   },
   {
@@ -45,7 +45,7 @@ const messageChannels: Channel[] = [
 const callChannels: Channel[] = [
   {
     icon: Phone,
-    label: rawPhone || "—",
+    label: rawPhone || "N/A",
     sub: "Mon–Sat, 9am–6pm",
     href: `tel:${rawPhone}`,
   },
@@ -109,7 +109,7 @@ export default function ContactPage() {
             </h2>
             <p className="mb-8 text-sm leading-relaxed text-foreground/45">
               The quickest way to book. Send us your vehicle details,
-              location, and preferred date — we respond within the hour.
+              location, and preferred date, we respond within the hour.
             </p>
             <div className="space-y-2.5">
               {messageChannels.map((ch) => (
@@ -127,7 +127,7 @@ export default function ContactPage() {
             </h2>
             <p className="mb-8 text-sm leading-relaxed text-foreground/45">
               Happy to discuss your requirements by phone. Calls welcome
-              during working hours — leave a message if we&apos;re on a job
+              during working hours; leave a message if we&apos;re on a job
               and we&apos;ll call back the same day.
             </p>
             <div className="space-y-2.5">
@@ -178,7 +178,7 @@ export default function ContactPage() {
         <div className="mx-auto max-w-[1400px]">
           <p className="max-w-2xl text-xs leading-relaxed text-foreground/25">
             KJ Detailz is a fully mobile service based in Dorset. We come to
-            your home, workplace, or any suitable location — no need to
+            your home, workplace, or any suitable location, no need to
             travel. Serving Dorset, Wiltshire, Hampshire and Somerset.
           </p>
         </div>
