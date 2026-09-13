@@ -1,4 +1,4 @@
-import { getReviews, getReviewStats } from "@/app/_data/sanity/queries";
+import { getReviews } from "@/app/_data/sanity/queries";
 import { Star } from "lucide-react";
 
 export function getInitials(name: string | undefined): string {
@@ -13,33 +13,18 @@ export function getInitials(name: string | undefined): string {
 }
 
 export default async function ReviewsSection() {
-  const [testimonials, stats] = await Promise.all([
-    getReviews(),
-    getReviewStats(),
-  ]);
+  const testimonials = await getReviews();
 
   return (
     <section className="px-4 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-[1400px]">
-        <div className="mb-12 flex items-end justify-between">
-          <div>
-            <p className="mb-3 text-[11px] uppercase tracking-[0.32em] text-primary">
-              Client Reviews
-            </p>
-            <h2 className="font-serif text-4xl text-foreground md:text-5xl">
-              What our clients say.
-            </h2>
-          </div>
-          {stats.count > 0 ? (
-            <div className="hidden text-right md:block">
-              <div className="font-serif text-5xl leading-none text-primary">
-                {stats.average.toFixed(1)}
-              </div>
-              <p className="mt-1.5 text-xs tracking-wide text-foreground/35">
-                Average rating
-              </p>
-            </div>
-          ) : null}
+        <div className="mb-12">
+          <p className="mb-3 text-[11px] uppercase tracking-[0.32em] text-primary">
+            Client Reviews
+          </p>
+          <h2 className="font-serif text-4xl text-foreground md:text-5xl">
+            What our clients say.
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
