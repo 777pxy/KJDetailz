@@ -18,21 +18,24 @@ Lives alongside the existing `package` type, with these fields:
 | Included services    | `package_services`   | `array` of `string`                | Same field name as the existing `package` type — a bullet-point checklist. |
 | Optional add-ons    | `extra_services`     | `array` of references to `extra_service` | Reuses the **existing** `extra_service` type — same pool of add-ons available to regular packages. |
 | Price                | `price`             | `number`                           | Required                                                             |
+| Image                | `image`             | `image` (with hotspot)              | Optional. The photo shown for this service on `/premium-services` and in the homepage preview. Hotspot is enabled (unlike `gallary_image`'s `image`, which doesn't have it), for better crop control on this more layout-sensitive placement. |
 | Visible on site      | `isVisible`          | `boolean`                          | Same show/hide toggle used on `package` and the other content types. |
 
-This mirrors the existing `package` schema, plus one addition
-(`description`) to support the more persuasive/marketing-led copy premium
-listings need. `service_name` (not `package_name`) and the document type
-name `premium_service` (not `premium_package`) are deliberate — these are
-"premium services", not packages, and the naming should read that way
-end-to-end (schema, generated types, GROQ queries, component).
+This mirrors the existing `package` schema, plus two additions
+(`description`, `image`) to support the more persuasive/marketing-led copy
+and dedicated photography premium listings need. `service_name` (not
+`package_name`) and the document type name `premium_service` (not
+`premium_package`) are deliberate — these are "premium services", not
+packages, and the naming should read that way end-to-end (schema, generated
+types, GROQ queries, component).
 
 ## Add premium service documents
 
 In Studio, create one or more `Premium Service` documents (name, price,
-included services, optional add-ons, and toggle `Visible on site` on). Only
-visible documents show up on the site, ordered by price ascending — same
-behaviour as the regular packages list.
+included services, optional add-ons, an image, and toggle `Visible on site`
+on). Only visible documents show up on the site, ordered by price ascending —
+same behaviour as the regular packages list. A service with no image assigned
+just shows no photo (the layout degrades gracefully, it doesn't break).
 
 ## Where this shows up on the site
 

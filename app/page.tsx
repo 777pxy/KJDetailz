@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-import { getImagesForGallery, getPremiumServices } from "@/app/_data/sanity/queries";
+import { getPremiumServices } from "@/app/_data/sanity/queries";
 import { urlFor } from "@/src/sanity/sanity";
 import { serviceAreaCounties } from "@/lib/seo/service-areas";
 import ReviewsSection from "@/app/components/review-section";
@@ -37,10 +37,7 @@ const trustSignals = [
 ];
 
 async function PremiumPreview() {
-  const [services, galleryImages] = await Promise.all([
-    getPremiumServices(),
-    getImagesForGallery(),
-  ]);
+  const services = await getPremiumServices();
 
   if (services.length === 0) {
     return (
@@ -53,12 +50,7 @@ async function PremiumPreview() {
 
   return (
     <div className="mb-8 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
-      {services.slice(0, 4).map((service, i) => {
-        const image =
-          galleryImages.length > 0
-            ? galleryImages[i % galleryImages.length]
-            : undefined;
-
+      {services.slice(0, 4).map((service) => {
         return (
           <Link
             key={service._id}
@@ -66,10 +58,10 @@ async function PremiumPreview() {
             className="group relative block overflow-hidden text-left"
             style={{ aspectRatio: "3/4" }}
           >
-            {image?.image ? (
+            {service.image ? (
               <Image
-                src={urlFor(image.image).width(600).height(800).quality(80).format("webp").url()}
-                alt={image.image_name ?? service.service_name ?? ""}
+                src={urlFor(service.image).width(600).height(800).quality(80).format("webp").url()}
+                alt={service.service_name ?? ""}
                 fill
                 sizes="(max-width: 1024px) 50vw, 330px"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

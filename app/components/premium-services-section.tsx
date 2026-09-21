@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getImagesForGallery, getPremiumServices } from "../_data/sanity/queries";
+import { getPremiumServices } from "../_data/sanity/queries";
 import {
   Extra_service,
   Premium_serviceWithExtras,
@@ -7,10 +7,7 @@ import {
 import { urlFor } from "@/src/sanity/sanity";
 
 export async function PremiumServicesSection() {
-  const [services, galleryImages] = await Promise.all([
-    getPremiumServices(),
-    getImagesForGallery(),
-  ]);
+  const services = await getPremiumServices();
 
   if (services.length === 0) {
     return (
@@ -26,25 +23,20 @@ export async function PremiumServicesSection() {
   return (
     <div className="border-t border-border">
       {services.map((service: Premium_serviceWithExtras, i) => {
-        const image =
-          galleryImages.length > 0
-            ? galleryImages[i % galleryImages.length]
-            : undefined;
-
         return (
           <div
             key={service._id}
             id={service._id}
             className="grid grid-cols-1 border-b border-border scroll-mt-[84px] lg:grid-cols-2"
           >
-            {image?.image ? (
+            {service.image ? (
               <div
                 className={`relative overflow-hidden ${i % 2 === 1 ? "lg:order-2" : ""}`}
                 style={{ minHeight: 360 }}
               >
                 <Image
-                  src={urlFor(image.image).width(900).height(700).quality(80).format("webp").url()}
-                  alt={image.image_name ?? service.service_name ?? "Premium detailing service"}
+                  src={urlFor(service.image).width(900).height(700).quality(80).format("webp").url()}
+                  alt={service.service_name ?? "Premium detailing service"}
                   fill
                   sizes="(max-width: 1024px) 100vw, 670px"
                   className="object-cover"
@@ -55,7 +47,7 @@ export async function PremiumServicesSection() {
 
             <div
               className={`flex flex-col justify-center p-10 lg:p-16 ${
-                image?.image && i % 2 === 1 ? "lg:order-1" : ""
+                service.image && i % 2 === 1 ? "lg:order-1" : ""
               }`}
             >
               <div className="mb-6 h-px w-8 bg-primary" />
