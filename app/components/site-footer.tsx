@@ -3,8 +3,8 @@ import Image from "next/image";
 import { toWhatsAppHref } from "@/lib/phone";
 
 const footerLinks = [
-  { href: "/services", label: "Services" },
   { href: "/premium-services", label: "Premium Services" },
+  { href: "/services", label: "Services" },
   { href: "/team", label: "Our Team" },
   { href: "/areas", label: "Areas We Cover" },
   { href: "/contact", label: "Contact" },

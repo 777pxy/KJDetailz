@@ -30,15 +30,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      <section className="px-4 py-20 md:px-8">
-        <div className="mx-auto max-w-[1400px]">
-          <Suspense>
-            <PackagesSection />
-          </Suspense>
-        </div>
-      </section>
-
-      <section className="border-y border-border bg-card px-4 py-20 md:px-8">
+      <section className="border-b border-border bg-card px-4 py-20 md:px-8">
         <div className="mx-auto flex max-w-[1400px] flex-col items-start justify-between gap-10 md:flex-row md:items-end">
           <div className="max-w-xl">
             <p className="mb-4 text-[11px] uppercase tracking-[0.32em] text-primary">
@@ -60,6 +52,14 @@ export default async function ServicesPage() {
           >
             View Premium Services
           </Link>
+        </div>
+      </section>
+
+      <section className="px-4 py-20 md:px-8">
+        <div className="mx-auto max-w-[1400px]">
+          <Suspense>
+            <PackagesSection />
+          </Suspense>
         </div>
       </section>
 

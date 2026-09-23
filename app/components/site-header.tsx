@@ -3,12 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { toWhatsAppHref } from "@/lib/phone";
 
 const navLinks = [
+  { href: "/premium-services", label: "Premium Services" },
   { href: "/services", label: "Services" },
-  { href: "/premium-services", label: "Premium" },
   { href: "/team", label: "Team" },
   { href: "/areas", label: "Areas" },
   { href: "/contact", label: "Contact" },
@@ -55,21 +55,27 @@ export function SiteHeader({ phone }: { phone?: string }) {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
-          {navLinks.map((link) => {
+        <nav className="hidden items-center gap-3 md:flex" aria-label="Primary">
+          {navLinks.map((link, index) => {
             const active = isActiveLink(link.href, pathname);
             return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-[11px] uppercase tracking-[0.18em] transition-colors duration-200 ${
-                  active
-                    ? "text-primary"
-                    : "text-foreground/55 hover:text-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
+              <Fragment key={link.href}>
+                {index > 0 ? (
+                  <span className="text-foreground/20" aria-hidden="true">
+                    ·
+                  </span>
+                ) : null}
+                <Link
+                  href={link.href}
+                  className={`text-[11px] uppercase tracking-[0.18em] transition-colors duration-200 ${
+                    active
+                      ? "text-primary"
+                      : "text-foreground/55 hover:text-foreground"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </Fragment>
             );
           })}
         </nav>
