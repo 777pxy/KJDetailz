@@ -30,6 +30,13 @@ export type Premium_service = {
   _rev: string;
   service_name?: string;
   description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   package_services?: Array<string>;
   extra_services?: Array<
     {

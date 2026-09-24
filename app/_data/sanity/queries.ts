@@ -25,7 +25,8 @@ const PREMIUM_SERVICETYPES_QUERY = `*[_type == "premium_service" && isVisible] |
   description,
   package_services,
   "extra_services": extra_services[]-> | order(price asc) { _id, description, price },
-  price
+  price,
+  image
 }`
 
 export async function getReviews(): Promise<types.Customer_review[]> {

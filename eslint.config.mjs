@@ -12,6 +12,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "KJ-reference/**",
+    "kjdetailz_updated/**",
     "next-env.d.ts",
   ]),
 ]);

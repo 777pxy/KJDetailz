@@ -1,4 +1,3 @@
-// app/_components/ReviewsSection.tsx
 import { getReviews } from "@/app/_data/sanity/queries";
 import { Star } from "lucide-react";
 
@@ -17,38 +16,49 @@ export default async function ReviewsSection() {
   const testimonials = await getReviews();
 
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-      {testimonials.map((testimonial) => (
-        <article
-          key={testimonial.customer_name}
-          className="flex flex-col justify-between rounded-lg border border-border bg-card p-6 transition-all duration-300 hover:border-primary/30 md:p-8"
-        >
-          <p className="mb-4 text-sm leading-relaxed text-foreground md:mb-6 md:text-base">
-            &ldquo;{testimonial.body}&rdquo;
+    <section className="px-4 py-16 md:px-8 md:py-24">
+      <div className="mx-auto max-w-[1400px]">
+        <div className="mb-12">
+          <p className="mb-3 text-[11px] uppercase tracking-[0.32em] text-primary">
+            Client Reviews
           </p>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-3">
-              <div className="flex size-10 items-center justify-center rounded-full bg-secondary text-xs font-semibold md:size-12 md:text-sm">
-                {getInitials(testimonial.customer_name ?? "")}
+          <h2 className="font-serif text-4xl text-foreground md:text-5xl">
+            What our clients say.
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map((testimonial) => (
+            <article
+              key={testimonial.customer_name}
+              className="border border-border p-7 transition-colors duration-300 hover:border-primary/18"
+            >
+              <div className="mb-4 flex gap-0.5 text-primary">
+                {Array.from({ length: Number(testimonial.stars ?? 0) }).map(
+                  (_, index) => (
+                    <Star
+                      key={index}
+                      className="size-[11px] fill-primary text-primary"
+                      aria-hidden="true"
+                    />
+                  ),
+                )}
               </div>
-              <div className="text-xs text-muted-foreground md:text-sm">
-                {testimonial.customer_name}
+              <p className="mb-5 text-sm leading-relaxed text-foreground/75">
+                &ldquo;{testimonial.body}&rdquo;
+              </p>
+              <div className="border-t border-border pt-4">
+                <p className="text-sm text-foreground">
+                  {testimonial.customer_name}
+                </p>
+                <p className="mt-0.5 text-xs text-foreground/35">
+                  {testimonial.service_type}
+                </p>
               </div>
-            </div>
-            <div className="flex gap-1 pt-2 pl-1">
-              {Array.from({ length: Number(testimonial.stars ?? 0) }).map(
-                (_, index) => (
-                  <Star
-                    key={index}
-                    className="size-4 fill-primary text-primary md:size-5"
-                    aria-hidden="true"
-                  />
-                ),
-              )}
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

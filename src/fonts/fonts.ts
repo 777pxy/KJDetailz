@@ -1,14 +1,14 @@
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Inter, Fraunces } from 'next/font/google';
 
-export const playfair = Playfair_Display({
+export const fraunces = Fraunces({
   subsets: ['latin'],
   style: ['normal', 'italic'],
-  weight: ['400', '600', '700'],
-  variable: '--font-playfair',
+  weight: ['300', '400', '500'],
+  variable: '--font-fraunces',
 });
 
 export const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['300', '400', '500', '600'],
   variable: '--font-inter',
 });
